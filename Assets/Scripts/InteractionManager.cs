@@ -35,17 +35,18 @@ public class InteractionManager : MonoBehaviour
     private void Update()
     {
         IInteractable target = GetTargetInteractable();
-        if (target as IGrabbable != null)
+
+        if (heldItem != null || target as IGrabbable != null)
         {
             HandleGrabbable(target as IGrabbable);
         }
-        else
+        else if (target != null)
         {
-            HandleInteractable();
+            HandleInteractable(target);
         }
     }
 
-    private void HandleInteractable()
+    private void HandleInteractable(IInteractable target)
     {
         Debug.LogException(new System.NotImplementedException("IInteractable handling is not implemented."));
     }
@@ -112,25 +113,24 @@ public class InteractionManager : MonoBehaviour
 
     // PICKUP/DROP FUNCTIONS
     //
-    private void PickUpItem(IGrabbable item)
+    private void PickUpItem(IGrabbable target)
     {
-        if (heldItem != null || item == null)
+        if (heldItem != null || target == null || target.Locked)
             return;
 
-        item.Lock();
+        target.Lock();
 
-        item.gameObject.transform.SetParent(heldItemParent);
-        item.gameObject.transform.localPosition = Vector3.zero;
-        item.gameObject.transform.localRotation = Quaternion.identity;
+        target.gameObject.transform.SetParent(heldItemParent);
+        target.gameObject.transform.localPosition = Vector3.zero;
+        target.gameObject.transform.localRotation = Quaternion.identity;
 
-        heldItem = item;
+        heldItem = target;
     }
     private void DropItem(IGrabbable item)
     {
         if (item == null)
             return;
 
-        StopUsingItem(item as IUsable);
         item.Unlock();
 
         item.gameObject.transform.SetParent(null);
@@ -138,8 +138,8 @@ public class InteractionManager : MonoBehaviour
 
         if (item == heldItem)
         {
+            StopUsingItem(item as IUsable);
             heldItem = null;
-            isUsingItem = false;
         }
     }
     //

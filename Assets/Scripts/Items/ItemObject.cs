@@ -8,17 +8,21 @@ public class ItemObject : MonoBehaviour, IGrabbable
     [SerializeField] ItemData itemData;
     [SerializeField] Rigidbody Rigidbody;
 
+    public bool Locked { get; private set; }
+
     public void Interact()
     {}
 
     public virtual void Lock()
     {
         Rigidbody.isKinematic = true;
+        Locked = true;
     }
 
     public virtual void Unlock()
     {
         Rigidbody.isKinematic = false;
+        Locked = false;
     }
 
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface IGrabbable : IInteractable
 {
+    bool Locked { get; }
+
     void Lock();
     void Unlock();
 }
