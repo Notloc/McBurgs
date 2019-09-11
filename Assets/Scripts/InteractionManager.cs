@@ -48,7 +48,10 @@ public class InteractionManager : MonoBehaviour
 
     private void HandleInteractable(IInteractable target)
     {
-        Debug.LogException(new System.NotImplementedException("IInteractable handling is not implemented."));
+        bool interact = Input.GetButtonDown(ControlBindings.INTERACT);
+
+        if (interact)
+            target.Interact();
     }
 
     private void HandleGrabbable(IGrabbable target)

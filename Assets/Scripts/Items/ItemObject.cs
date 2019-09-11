@@ -5,10 +5,9 @@ using UnityEngine;
 public class ItemObject : MonoBehaviour, IGrabbable
 {
     [Header("Required References")]
-    [SerializeField] ItemData itemData;
-    [SerializeField] Rigidbody Rigidbody;
+    [SerializeField] protected Rigidbody Rigidbody;
 
-    public bool Locked { get; private set; }
+    public bool Locked { get; protected set; }
 
     public void Interact()
     {}
@@ -17,12 +16,13 @@ public class ItemObject : MonoBehaviour, IGrabbable
     {
         Rigidbody.isKinematic = true;
         Locked = true;
+        this.gameObject.SetLayerRecursively(LayerManager.HeldLayer);
     }
 
     public virtual void Unlock()
     {
         Rigidbody.isKinematic = false;
         Locked = false;
+        this.gameObject.SetLayerRecursively(LayerManager.DefaultLayer);
     }
-
 }
