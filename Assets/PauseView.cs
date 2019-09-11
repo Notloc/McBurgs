@@ -10,39 +10,29 @@ public class PauseView : MonoBehaviour
 
     public bool IsPaused { get; private set; }
 
+    private Player player;
+
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag(TagManager.Player).GetComponent<Player>();
         resumeButton.onClick.AddListener(ResumeGame);
-    }
-
-    private void OnEnable()
-    {
-        _PauseGame();
-    }
-    private void OnDisable()
-    {
-        _ResumeGame();
-    }
-
-    private void _PauseGame()
-    {
-        Time.timeScale = 0f;
-        IsPaused = true;
-    }
-
-    private void _ResumeGame()
-    {
-        Time.timeScale = 1f;
-        IsPaused = false;
     }
 
     public void ResumeGame()
     {
         this.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+
+        player.Unpause();
+        IsPaused = false;
     }
 
     public void PauseGame()
     {
         this.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+
+        player.Pause();
+        IsPaused = true;
     }
 }
