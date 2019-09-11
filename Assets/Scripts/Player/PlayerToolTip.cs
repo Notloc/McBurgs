@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerToolTip : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Required References")]
+    [SerializeField] InteractionManager interactionManager;
 
-    // Update is called once per frame
-    void Update()
+    private void LateUpdate()
     {
+        IInteractable target = interactionManager.Target;
+
+        if (target != null)
+            this.transform.position = target.transform.position;
+        else
+            this.transform.position = new Vector3(0f, -9999f, 0f);
         
     }
 }

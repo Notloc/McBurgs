@@ -17,6 +17,7 @@ public class InteractionManager : PlayerComponent
     [SerializeField] LayerMask grabbableMask;
     
     private bool isHoldingItem { get { return heldItem != null; } }
+    public IInteractable Target { get; private set; }
 
     IGrabbable heldItem = null;
     IGrabbable storedItem = null;
@@ -35,6 +36,7 @@ public class InteractionManager : PlayerComponent
     private void Update()
     {
         IInteractable target = GetTargetInteractable();
+        Target = target;
 
         if (heldItem != null || target as IGrabbable != null)
         {
