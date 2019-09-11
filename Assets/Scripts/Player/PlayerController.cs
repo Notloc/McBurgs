@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IPausable
+public class PlayerController : PlayerComponent
 {
     [Header("Required References")]
     [SerializeField] Rigidbody targetBody;
@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour, IPausable
     [SerializeField] float maxXRotation = 80f;
     [SerializeField] float minXRotation = -80f;
 
-    public bool IsPaused { get; private set; }
     private float cameraRotation = 0f;
 
     private void FixedUpdate()
@@ -64,15 +63,5 @@ public class PlayerController : MonoBehaviour, IPausable
         // Clamp velocity if needed
         if (targetBody.velocity.sqrMagnitude > maxMovementSpeed * maxMovementSpeed)
             targetBody.velocity = Vector3.ClampMagnitude(targetBody.velocity, maxMovementSpeed);
-    }
-
-    public void Pause()
-    {
-        this.enabled = false;
-    }
-
-    public void Unpause()
-    {
-        this.enabled = true;
     }
 }

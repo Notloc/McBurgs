@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Manages a player's interactions with items and interactables in the game world.
 /// </summary>
-public class InteractionManager : MonoBehaviour, IPausable
+public class InteractionManager : PlayerComponent
 {
     [Header("Required References")]
     [SerializeField] Camera targetCamera;
@@ -15,8 +15,7 @@ public class InteractionManager : MonoBehaviour, IPausable
     [Header("Options")]
     [SerializeField] float grabDistance = 1.5f;
     [SerializeField] LayerMask grabbableMask;
-
-    public bool IsPaused { get; private set; }
+    
     private bool isHoldingItem { get { return heldItem != null; } }
 
     IGrabbable heldItem = null;
@@ -186,15 +185,4 @@ public class InteractionManager : MonoBehaviour, IPausable
         }
     }
     //
-
-
-    public void Pause()
-    {
-        this.enabled = false;
-    }
-
-    public void Unpause()
-    {
-        this.enabled = true;
-    }
 }
