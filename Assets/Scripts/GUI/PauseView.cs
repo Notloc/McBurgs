@@ -22,6 +22,7 @@ public class PauseView : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
 
         player.Unpause();
         IsPaused = false;
@@ -31,6 +32,7 @@ public class PauseView : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
 
         player.Pause();
         IsPaused = true;
