@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerController : PlayerComponent
 {
     [Header("Required References")]
-    [SerializeField] Rigidbody targetBody;
+    [SerializeField] Rigidbody playerRBody;
+    [SerializeField] Collider playerCollider;
     [SerializeField] Camera targetCamera;
+    [SerializeField] PhysicMaterial movingMaterial;
+    [SerializeField] PhysicMaterial stationaryMaterial;
 
     [Header("Movement Options")]
     [SerializeField] float movementForce = 100f;
@@ -32,7 +35,7 @@ public class PlayerController : PlayerComponent
         float yRotation = Input.GetAxis(ControlBindings.VIEW_INPUT_X);
         Quaternion deltaRotation = Quaternion.Euler(0f, yRotation, 0f);
 
-        targetBody.rotation = deltaRotation * targetBody.rotation;
+        playerRBody.rotation = deltaRotation * playerRBody.rotation;
 
 
         // Camera rotation
@@ -47,21 +50,27 @@ public class PlayerController : PlayerComponent
 
     private void Move(float deltaTime)
     {
-        Vector3 movement = new Vector3(
-            Input.GetAxis(ControlBindings.MOVEMENT_INPUT_X), 
-            0f, 
-            Input.GetAxis(ControlBindings.MOVEMENT_INPUT_Y
-        ));
-        movement *= movementForce;
+        float xInput = Input.GetAxis(ControlBindings.MOVEMENT_INPUT_X);
+        float yInput = Input.GetAxis(ControlBindings.MOVEMENT_INPUT_Y);
+
+        if (xInput == 0 && yInput == 0)
+            playerCollider.material = stationaryMaterial;
+        else
+            playerCollider.material = movingMaterial;
+
+        Vector3 movement = new Vector3(xInput, 0f, yInput) * movementForce;
 
         // Sprint
-        if (Input.GetButton(ControlBindings.SPRINT))
+        bool isSprinting = Input.GetButton(ControlBindings.SPRINT);
+        if (isSprinting)
             movement *= sprintMultiplier;
 
-        targetBody.AddRelativeForce(movement);
+        float maxSpeed = isSprinting ? maxMovementSpeed * sprintMultiplier : maxMovementSpeed;
+
+        playerRBody.AddRelativeForce(movement);
 
         // Clamp velocity if needed
-        if (targetBody.velocity.sqrMagnitude > maxMovementSpeed * maxMovementSpeed)
-            targetBody.velocity = Vector3.ClampMagnitude(targetBody.velocity, maxMovementSpeed);
+        if (playerRBody.velocity.sqrMagnitude > maxSpeed * maxSpeed)
+            playerRBody.velocity = Vector3.ClampMagnitude(playerRBody.velocity, maxSpeed);
     }
 }

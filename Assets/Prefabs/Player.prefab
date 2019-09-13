@@ -334,11 +334,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9da1480336ba47940b029617e8d6b6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetBody: {fileID: 7182571765341177862}
+  playerRBody: {fileID: 7182571765341177862}
+  playerCollider: {fileID: 1443095009881360261}
   targetCamera: {fileID: 6327642950582297385}
+  movingMaterial: {fileID: 13400000, guid: 589e763cb9847be4ca5045854d6c16a5, type: 2}
+  stationaryMaterial: {fileID: 13400000, guid: 7b3b42b17348ad0469cb3610d23c53e4, type: 2}
   movementForce: 650
-  sprintMultiplier: 1.25
-  maxMovementSpeed: 7
+  sprintMultiplier: 1.5
+  maxMovementSpeed: 1.5
   sensitivity: 2
   maxXRotation: 80
   minXRotation: -80
