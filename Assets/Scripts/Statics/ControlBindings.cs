@@ -4,6 +4,8 @@ using UnityEngine;
 
 public static class ControlBindings
 {
+    public static string PAUSE = "Pause";
+
     public static string VIEW_INPUT_X = "Mouse X";
     public static string VIEW_INPUT_Y = "Mouse Y";
 

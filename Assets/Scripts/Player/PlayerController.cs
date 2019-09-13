@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : PlayerComponent
 {
     [Header("Required References")]
     [SerializeField] Rigidbody targetBody;
