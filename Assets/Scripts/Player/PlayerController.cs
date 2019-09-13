@@ -70,7 +70,15 @@ public class PlayerController : PlayerComponent
         playerRBody.AddRelativeForce(movement);
 
         // Clamp velocity if needed
-        if (playerRBody.velocity.sqrMagnitude > maxSpeed * maxSpeed)
-            playerRBody.velocity = Vector3.ClampMagnitude(playerRBody.velocity, maxSpeed);
+        // Y is seperated to allow normal gravity
+        Vector3 velocity = playerRBody.velocity;
+        float yVelocity = velocity.y;
+        velocity.y = 0f;
+        if (velocity.sqrMagnitude > maxSpeed * maxSpeed)
+        {
+            velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
+            velocity.y = yVelocity;
+            playerRBody.velocity = velocity;
+        }
     }
 }

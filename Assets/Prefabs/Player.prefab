@@ -341,7 +341,7 @@ MonoBehaviour:
   stationaryMaterial: {fileID: 13400000, guid: 7b3b42b17348ad0469cb3610d23c53e4, type: 2}
   movementForce: 650
   sprintMultiplier: 1.5
-  maxMovementSpeed: 1.5
+  maxMovementSpeed: 1.75
   sensitivity: 2
   maxXRotation: 80
   minXRotation: -80
