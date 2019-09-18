@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class GrillObject : MonoBehaviour, IInteractable, IHaveTooltip
 {
+    [SerializeField] TooltipData tooltipData;
     [SerializeField] Vector3 toolTipDisplayOffset;
-    public Vector3 DisplayOffset { get { return this.transform.rotation * toolTipDisplayOffset; } }
 
+    public Vector3 DisplayOffset { get { return this.transform.rotation * toolTipDisplayOffset; } }
+    public TooltipData TooltipData { get { return tooltipData; } }
+
+    public bool IsOn { get { return isOn; } }
     bool isOn = false;
     HashSet<ICookable> grillingItems = new HashSet<ICookable>();
 

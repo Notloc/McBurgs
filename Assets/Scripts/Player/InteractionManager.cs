@@ -17,12 +17,12 @@ public class InteractionManager : PlayerComponent
     [SerializeField] LayerMask raycastMask;
     [SerializeField] LayerMask interactionLayers; // Valid layers for interaction
 
-    private bool isHoldingItem { get { return heldItem != null; } }
 
+    public IGrabbable HeldItem { get; private set; }
     public IInteractable TargetInteractable { get; private set; }
     public Collider TargetCollider { get; private set; }
 
-    IGrabbable heldItem = null;
+    private bool isHoldingItem { get { return HeldItem != null; } }
     IGrabbable storedItem = null;
     bool isUsingItem = false;
 
@@ -52,7 +52,7 @@ public class InteractionManager : PlayerComponent
         UpdateTargets();
         IInteractable target = TargetInteractable;
 
-        if (heldItem != null || target as IGrabbable != null)
+        if (HeldItem != null || target as IGrabbable != null)
         {
             HandleGrabbable(target as IGrabbable);
         }
@@ -89,21 +89,21 @@ public class InteractionManager : PlayerComponent
             if (!isHoldingItem)
                 PickUpItem(target);
             else
-                DropItem(heldItem);
+                DropItem(HeldItem);
 
             return;
         }
 
-        if (heldItem as IUsable != null)
+        if (HeldItem as IUsable != null)
         {
             // Use/Stop using held item
             if (use && isHoldingItem)
             {
-                UseItem(heldItem as IUsable);
+                UseItem(HeldItem as IUsable);
             }
             else if (!use && isHoldingItem)
             {
-                StopUsingItem(heldItem as IUsable);
+                StopUsingItem(HeldItem as IUsable);
             }
         }
     }
@@ -134,7 +134,7 @@ public class InteractionManager : PlayerComponent
     //
     private void PickUpItem(IGrabbable target)
     {
-        if (heldItem != null || target == null || target.Locked)
+        if (HeldItem != null || target == null || target.Locked)
             return;
 
         target.Lock();
@@ -143,7 +143,7 @@ public class InteractionManager : PlayerComponent
         target.gameObject.transform.localPosition = Vector3.zero;
         target.gameObject.transform.localRotation = Quaternion.identity;
 
-        heldItem = target;
+        HeldItem = target;
     }
     private void DropItem(IGrabbable item)
     {
@@ -155,10 +155,10 @@ public class InteractionManager : PlayerComponent
         item.gameObject.transform.SetParent(null);
         item.gameObject.transform.position = droppedItemPoint.position;
 
-        if (item == heldItem)
+        if (item == HeldItem)
         {
             StopUsingItem(item as IUsable);
-            heldItem = null;
+            HeldItem = null;
         }
     }
     //
@@ -188,9 +188,9 @@ public class InteractionManager : PlayerComponent
             UnstoreItem(wasStored);
         }
 
-        if (heldItem != null)
+        if (HeldItem != null)
         {
-            IGrabbable item = heldItem;
+            IGrabbable item = HeldItem;
             DropItem(item);
             StoreItem(item);
         }
