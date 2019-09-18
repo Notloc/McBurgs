@@ -2,19 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerToolTip : MonoBehaviour
+public class PlayerTooltip : MonoBehaviour
 {
     [Header("Required References")]
     [SerializeField] InteractionManager interactionManager;
+    [SerializeField] Canvas tooltipCanvas;
+
+    IHaveTooltip currentTarget;
 
     private void LateUpdate()
     {
-        IInteractable target = interactionManager.Target;
+        // Try to get a new target
+        IHaveTooltip newTarget = null;
+        Collider targetCollider = interactionManager.TargetCollider;
+        if (targetCollider)
+            newTarget = targetCollider.GetComponentInParent<IHaveTooltip>();
 
-        if (target != null)
-            this.transform.position = target.transform.position;
+        if (newTarget != null && currentTarget != newTarget)
+        {
+            PopulateTooltip(newTarget);
+            currentTarget = newTarget;
+        }
+
+        // Enable/Disable tooltip 
+        if (currentTarget == null)
+        {
+            tooltipCanvas.gameObject.SetActive(false);
+            return;
+        }
         else
-            this.transform.position = new Vector3(0f, -9999f, 0f);
-        
+            tooltipCanvas.gameObject.SetActive(true);
+
+        // Position the tooltip
+        tooltipCanvas.transform.position = currentTarget.transform.position + currentTarget.DisplayOffset;
+    }
+
+    private void PopulateTooltip(IHaveTooltip target)
+    {
+
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7875710015825888882}
   - component: {fileID: 6268133023963441758}
   - component: {fileID: 8527682395671579418}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ExampleItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +61,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bded89bf75eda4c8545b90dc1875aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 67a435343235f0849b842b32ab3292b5, type: 2}
   Rigidbody: {fileID: 6268133023963441758}
 --- !u!1 &7487469188710453204
 GameObject:
@@ -75,7 +74,7 @@ GameObject:
   - component: {fileID: 8080389000087770436}
   - component: {fileID: 2063840190579418302}
   - component: {fileID: 1339814046914887781}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

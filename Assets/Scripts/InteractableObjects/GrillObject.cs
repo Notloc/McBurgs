@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrillObject : MonoBehaviour, IInteractable
+public class GrillObject : MonoBehaviour, IInteractable, IHaveTooltip
 {
+    [SerializeField] Vector3 toolTipDisplayOffset;
+    public Vector3 DisplayOffset { get { return this.transform.rotation * toolTipDisplayOffset; } }
+
     bool isOn = false;
     HashSet<ICookable> grillingItems = new HashSet<ICookable>();
 

@@ -12,31 +12,45 @@ public class InteractionManager : PlayerComponent
     [SerializeField] Transform heldItemParent;
     [SerializeField] Transform droppedItemPoint;
 
-    [Header("Options")]
-    [SerializeField] float grabDistance = 1.5f;
-    [SerializeField] LayerMask grabbableMask;
-    
+    [Header("Interaction Options")]
+    [SerializeField] float interactionDistance = 1.5f;
+    [SerializeField] LayerMask raycastMask;
+    [SerializeField] LayerMask interactionLayers; // Valid layers for interaction
+
     private bool isHoldingItem { get { return heldItem != null; } }
-    public IInteractable Target { get; private set; }
+
+    public IInteractable TargetInteractable { get; private set; }
+    public Collider TargetCollider { get; private set; }
 
     IGrabbable heldItem = null;
     IGrabbable storedItem = null;
     bool isUsingItem = false;
 
-    private IInteractable GetTargetInteractable()
+    private void UpdateTargets()
     {
         RaycastHit hit;
-        if(Physics.Raycast(targetCamera.transform.position, targetCamera.transform.forward, out hit, grabDistance, grabbableMask))
+        if(Physics.Raycast(targetCamera.transform.position, targetCamera.transform.forward, out hit, interactionDistance, raycastMask))
         {
-            return hit.collider.GetComponentInParent<IInteractable>();
+            int colliderLayer = hit.collider.gameObject.layer;
+
+            if (interactionLayers.Contains(colliderLayer))
+                TargetInteractable = hit.collider.GetComponentInParent<IInteractable>();
+            else
+                TargetInteractable = null;
+
+            TargetCollider = hit.collider;
         }
-        return null;
+        else
+        {
+            TargetCollider = null;
+            TargetInteractable = null;
+        }
     }
 
     private void Update()
     {
-        IInteractable target = GetTargetInteractable();
-        Target = target;
+        UpdateTargets();
+        IInteractable target = TargetInteractable;
 
         if (heldItem != null || target as IGrabbable != null)
         {

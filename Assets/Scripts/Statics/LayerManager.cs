@@ -6,4 +6,5 @@ public static class LayerManager
 {
     public static LayerMask DefaultLayer = 0;
     public static LayerMask HeldLayer = 9;
+    public static LayerMask InteractionLayer = 10;
 }

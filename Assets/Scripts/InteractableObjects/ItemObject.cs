@@ -23,6 +23,6 @@ public class ItemObject : MonoBehaviour, IGrabbable
     {
         Rigidbody.isKinematic = false;
         Locked = false;
-        this.gameObject.SetLayerRecursively(LayerManager.DefaultLayer);
+        this.gameObject.SetLayerRecursively(LayerManager.InteractionLayer);
     }
 }
