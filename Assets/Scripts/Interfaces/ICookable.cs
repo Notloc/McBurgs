@@ -8,7 +8,7 @@ public enum CookingType
     Fry
 }
 
-public interface ICookable
+public interface ICookable : IGameObject
 {
     float PercentCooked { get; }
     float PercentMiscooked { get; }

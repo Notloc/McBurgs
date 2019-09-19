@@ -19,15 +19,26 @@ public class GrillObject : MonoBehaviour, IInteractable, IHaveTooltip
         GrillItems();
     }
 
+    List<ICookable> removalList = new List<ICookable>();
     private void GrillItems()
     {
         if (isOn == false)
             return;
 
-        foreach(ICookable item in grillingItems)
+        removalList.Clear();
+
+        foreach (ICookable item in grillingItems)
         {
-            item.Cook(CookingType.Grill, Time.fixedDeltaTime);
+            // Check for deleted and disabled objects
+            if (InterfaceUtil.IsNull(item) || item.gameObject.activeInHierarchy == false)
+                removalList.Add(item);
+            else
+                item.Cook(CookingType.Grill, Time.fixedDeltaTime);
         }
+
+        // Clear out deleted items
+        foreach(ICookable item in removalList)
+            grillingItems.Remove(item);
     }
 
     // ON/OFF CODE

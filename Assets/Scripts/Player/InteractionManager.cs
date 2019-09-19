@@ -29,7 +29,13 @@ public class InteractionManager : PlayerComponent
     private void UpdateTargets()
     {
         RaycastHit hit;
-        if(Physics.Raycast(targetCamera.transform.position, targetCamera.transform.forward, out hit, interactionDistance, raycastMask))
+        if(Physics.Raycast(
+            targetCamera.transform.position,
+            targetCamera.transform.forward,
+            out hit,
+            interactionDistance,
+            raycastMask,
+            QueryTriggerInteraction.Ignore))
         {
             int colliderLayer = hit.collider.gameObject.layer;
 
@@ -52,14 +58,15 @@ public class InteractionManager : PlayerComponent
         UpdateTargets();
         IInteractable target = TargetInteractable;
 
-        if (HeldItem != null || target as IGrabbable != null)
-        {
-            HandleGrabbable(target as IGrabbable);
-        }
-        else if (target != null)
+        if (target != null && target as IGrabbable == null)
         {
             HandleInteractable(target);
         }
+        else
+        {
+            HandleGrabbable(target as IGrabbable);
+        }
+        
     }
 
     private void HandleInteractable(IInteractable target)
@@ -116,6 +123,7 @@ public class InteractionManager : PlayerComponent
             return;
 
         item.EnableUse();
+        item.transform.localPosition = item.UseOffset;
         isUsingItem = true;
     }
 
@@ -125,6 +133,10 @@ public class InteractionManager : PlayerComponent
             return;
 
         item.DisableUse();
+
+        if (HeldItem == item as IGrabbable)
+            item.transform.localPosition = item.GrabOffset;
+
         isUsingItem = false;
     }
     //
@@ -140,7 +152,7 @@ public class InteractionManager : PlayerComponent
         target.Lock();
 
         target.gameObject.transform.SetParent(heldItemParent);
-        target.gameObject.transform.localPosition = Vector3.zero;
+        target.gameObject.transform.localPosition = target.GrabOffset;
         target.gameObject.transform.localRotation = Quaternion.identity;
 
         HeldItem = target;
@@ -153,12 +165,11 @@ public class InteractionManager : PlayerComponent
         item.Unlock();
 
         item.gameObject.transform.SetParent(null);
-        item.gameObject.transform.position = droppedItemPoint.position;
 
         if (item == HeldItem)
         {
-            StopUsingItem(item as IUsable);
             HeldItem = null;
+            StopUsingItem(item as IUsable);
         }
     }
     //
@@ -173,20 +184,19 @@ public class InteractionManager : PlayerComponent
         storedItem = item;
     }
 
-    private void UnstoreItem(IGrabbable item)
+    private IGrabbable UnstoreItem()
     {
+        IGrabbable item = storedItem;
+        if (item == null)
+            return null;
+
         item.gameObject.SetActive(true);
-        DropItem(item);
+        return item;
     }
 
     private void SwapItem()
     {
-        IGrabbable wasStored = null;
-        if (storedItem != null)
-        {
-            wasStored = storedItem;
-            UnstoreItem(wasStored);
-        }
+        IGrabbable wasStored = UnstoreItem();
 
         if (HeldItem != null)
         {

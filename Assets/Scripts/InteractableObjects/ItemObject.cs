@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour, IGrabbable
 {
+    [Header("ItemObject")]
     [Header("Required References")]
     [SerializeField] protected Rigidbody Rigidbody;
 
+    [Header("Options")]
+    [SerializeField] Vector3 grabOffet;
+
+    public Vector3 GrabOffset { get { return grabOffet; } }
     public bool Locked { get; protected set; }
 
     public void Interact()

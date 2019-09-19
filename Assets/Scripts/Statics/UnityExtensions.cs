@@ -27,5 +27,4 @@ public static class UnityExtensions
     {
         return ((self) & (1<<layer)) != 0;
     }
-
 }

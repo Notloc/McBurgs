@@ -8,7 +8,7 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip
 
     [Header("Cooking Options")]
     [SerializeField] CookingType cookingMethod;
-    [SerializeField] [Range(0.01f, 10f)] float cookingRate = 0.05f;
+    [SerializeField] [Range(0.01f, 5f)] float cookingRate = 0.05f;
     [SerializeField] Color cookedColor = Color.blue;
     [SerializeField] Color burntColor = Color.black;
 

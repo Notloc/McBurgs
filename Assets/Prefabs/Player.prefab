@@ -247,7 +247,7 @@ MonoBehaviour:
   targetCamera: {fileID: 6327642950582297385}
   heldItemParent: {fileID: 8690415314957154052}
   droppedItemPoint: {fileID: 1821075053621168338}
-  interactionDistance: 1.5
+  interactionDistance: 2.5
   raycastMask:
     serializedVersion: 2
     m_Bits: 1025
