@@ -19,14 +19,14 @@ public class ItemObject : MonoBehaviour, IGrabbable
 
     public virtual void Lock()
     {
-        Rigidbody.isKinematic = true;
+        Rigidbody.constraints = RigidbodyConstraints.FreezeAll; 
         Locked = true;
         this.gameObject.SetLayerRecursively(LayerManager.HeldLayer);
     }
 
     public virtual void Unlock()
     {
-        Rigidbody.isKinematic = false;
+        Rigidbody.constraints = RigidbodyConstraints.None;
         Locked = false;
         this.gameObject.SetLayerRecursively(LayerManager.InteractionLayer);
     }
