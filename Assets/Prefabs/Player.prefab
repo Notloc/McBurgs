@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1821075053621168338}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: DropPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 4793061517253047683}
   - component: {fileID: 6327642950582297385}
   - component: {fileID: 2275418326573800693}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlayerCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8690415314957154052}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HeldItemPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 3226854465611249443}
   - component: {fileID: 9049749402380805210}
   - component: {fileID: 6559895938970231549}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 3529146478691902710}
   - component: {fileID: 208075724078632070}
   - component: {fileID: 1443095009881360261}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Player Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,6 +358,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tooltip
       objectReference: {fileID: 0}
+    - target: {fileID: 2239393392215517392, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 6437964160517432819, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -413,11 +418,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2027260535650020368, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 4252627322999698293, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}
       propertyPath: interactionManager
       value: 
       objectReference: {fileID: 6559895938970231549}
+    - target: {fileID: 1563541126343845630, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 3310771891330447422, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}
       propertyPath: m_Camera

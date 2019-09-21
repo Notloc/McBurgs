@@ -12,7 +12,7 @@ public class CuttableFood : MonoBehaviour, ICuttable
     [SerializeField] Vector3 spreadStart;
     [SerializeField] Vector3 spreadEnd;
 
-    public void Cut()
+    public void Cut(Collision collision)
     {
         for (int i=0; i < amountProduced; i++)
         {

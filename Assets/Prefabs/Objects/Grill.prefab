@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 901853940590221398}
   - component: {fileID: 901853940590221394}
   - component: {fileID: 901853940590221395}
+  - component: {fileID: 3968683094504871703}
   m_Layer: 0
   m_Name: Grill
   m_TagString: Untagged
@@ -457,6 +458,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 513ee32c601fbd146875767c0f0a55e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tooltipData:
+    title:
+      entryType: 0
+      text: Grill
+      valueName: 
+      scriptReference: {fileID: 0}
+    entries:
+    - entryType: 1
+      text: 'Turned On? :'
+      valueName: IsOn
+      scriptReference: {fileID: 901853940590221394}
   toolTipDisplayOffset: {x: -0.75, y: 1, z: 0}
 --- !u!54 &901853940590221395
 Rigidbody:
@@ -469,8 +481,22 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &3968683094504871703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901853940590221401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5511ca762d8a6e14fac1283bc8a22854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectPrefab: {fileID: 975338256554551315, guid: a2f03a50da7b00344a389ff4e5c089a5,
+    type: 3}

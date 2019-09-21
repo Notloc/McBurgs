@@ -211,4 +211,26 @@ public class InteractionManager : PlayerComponent
         }
     }
     //
+
+
+
+    private void LateUpdate()
+    {
+        PositionHeldItem();
+    }
+
+    // Drive the held objects position to keep it properly positioned
+    // Held object is NOT kinematic, as it needs to interact with kinematic objects
+    private void PositionHeldItem()
+    {
+        if (InterfaceUtil.IsNull(HeldItem) == false)
+        {
+            if (isUsingItem && !InterfaceUtil.IsNull(HeldItem as IUsable))
+                HeldItem.transform.localPosition = (HeldItem as IUsable).UseOffset;
+            else
+                HeldItem.transform.localPosition = HeldItem.GrabOffset;
+
+            HeldItem.transform.localRotation = Quaternion.identity;
+        }
+    }
 }

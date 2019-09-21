@@ -17,7 +17,12 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip
     [SerializeField] Vector3 displayOffset;
 
     public TooltipData TooltipData { get { return tooltipData; } }
-    public Vector3 DisplayOffset { get { return this.transform.rotation * displayOffset; } }
+    public Vector3 DisplayOffset { get {
+            Vector3 rot = this.transform.rotation.eulerAngles;
+            rot.x = 0;
+            rot.z = 0;
+            return Quaternion.Euler(rot) * displayOffset;
+        } }
 
     Color originalColor;
     float percentCooked = 0f;

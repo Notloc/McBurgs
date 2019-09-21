@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class KnifeObject : ItemObject, IUsable
 {
-    [Header("Knife")]
-    [Header("Require References")]
-    [SerializeField] Collider cuttingTrigger;
-
     [Header("Options")]
     [SerializeField] Vector3 useOffset = Vector3.zero;
 
     public Vector3 UseOffset { get { return useOffset; } }
+    public bool CutEnabled { get; private set; }
+
+    bool enableBlade = false;
 
     public void EnableUse()
     {
-        cuttingTrigger.enabled = true;
+        CutEnabled = true;
     }
 
     public void DisableUse()
     {
-        cuttingTrigger.enabled = false;
+        CutEnabled = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        ICuttable cuttable = other.GetComponentInParent<ICuttable>();
-        if (cuttable != null)
-            cuttable.Cut();
+        ICuttable cuttable = collision.collider.GetComponentInParent<ICuttable>();
+        if (InterfaceUtil.IsNull(cuttable) == false)
+        {
+            cuttable.Cut(collision);
+        }
     }
 }
