@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 237394617527604224}
   - component: {fileID: 6142146849226385182}
   - component: {fileID: 780884408833488373}
+  - component: {fileID: 7192598437795876246}
   m_Layer: 10
   m_Name: BaseFood
   m_TagString: Untagged
@@ -60,8 +61,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7bbbd68183d68741969846bb70bd22c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rigidbody: {fileID: 6142146849226385182}
+  rigidbody: {fileID: 6142146849226385182}
   grabOffet: {x: 0.2, y: 0.25, z: 0.15}
+  useOffset: {x: 0.18, y: 0.2, z: 0.25}
   renderer: {fileID: 0}
   cookingMethod: 0
   cookingRate: 0.05
@@ -83,3 +85,17 @@ MonoBehaviour:
       valueName: PercentMiscooked
       scriptReference: {fileID: 780884408833488373}
   displayOffset: {x: 0, y: 0.5, z: 0}
+--- !u!114 &7192598437795876246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5175038671335199180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d046da7f323b3554e82af38e71050799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  node1: {fileID: 0}
+  node2: {fileID: 0}

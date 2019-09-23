@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class FoodObject : ItemObject, ICookable, IHaveTooltip
+public class FoodObject : ItemObject, ICookable, IHaveTooltip, IUsable
 {
+    [SerializeField] Vector3 useOffset;
+    [SerializeField] Quaternion useRotation = Quaternion.identity;
     [SerializeField] Renderer renderer;
 
     [Header("Cooking Options")]
@@ -31,6 +34,12 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip
     public float PercentCooked { get { return percentCooked;} }
     public float PercentMiscooked { get { return percentMiscooked; } }
 
+    public Vector3 UseOffset { get { return useOffset; } }
+    public Quaternion UseRotation { get { return useRotation; } }
+
+    public UnityAction OnEnableEvent { get; set; }
+    public UnityAction OnDisableEvent { get; set; }
+
     private void Awake()
     {
         originalColor = renderer.material.color;
@@ -50,5 +59,15 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip
     {
         Color newColor = Color.Lerp(originalColor, cookedColor, percentCooked);
         renderer.material.color = Color.Lerp(newColor, burntColor, percentMiscooked);
+    }
+
+    public void EnableUse()
+    {
+        OnEnableEvent?.Invoke();
+    }
+
+    public void DisableUse()
+    {
+        OnDisableEvent?.Invoke();
     }
 }

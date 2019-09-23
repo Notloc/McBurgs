@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController Instance;
+
     [Header("Prefabs")]
     [SerializeField] Player playerPrefab;
     [SerializeField] GuiController guiPrefab;
@@ -16,6 +18,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
         Cursor.lockState = CursorLockMode.Locked;
 
         Player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);

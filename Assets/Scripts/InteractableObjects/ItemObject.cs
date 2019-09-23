@@ -6,11 +6,12 @@ public class ItemObject : MonoBehaviour, IGrabbable
 {
     [Header("ItemObject")]
     [Header("Required References")]
-    [SerializeField] protected Rigidbody Rigidbody;
+    [SerializeField] protected Rigidbody rigidbody;
 
     [Header("Options")]
     [SerializeField] Vector3 grabOffet;
 
+    public Rigidbody Rigidbody { get { return rigidbody; } }
     public Vector3 GrabOffset { get { return grabOffet; } }
     public bool Locked { get; protected set; }
 
@@ -19,15 +20,20 @@ public class ItemObject : MonoBehaviour, IGrabbable
 
     public virtual void Lock()
     {
-        Rigidbody.constraints = RigidbodyConstraints.FreezeAll; 
+        rigidbody.constraints = RigidbodyConstraints.FreezeAll; 
         Locked = true;
-        this.gameObject.SetLayerRecursively(LayerManager.HeldLayer);
+        this.gameObject.layer = LayerManager.HeldLayer;
     }
 
     public virtual void Unlock()
     {
-        Rigidbody.constraints = RigidbodyConstraints.None;
+        rigidbody.constraints = RigidbodyConstraints.None;
         Locked = false;
-        this.gameObject.SetLayerRecursively(LayerManager.InteractionLayer);
+        this.gameObject.layer = LayerManager.InteractionLayer;
+    }
+
+    public void ChangeRigidbody(Rigidbody newRigid)
+    {
+        rigidbody = newRigid;
     }
 }
