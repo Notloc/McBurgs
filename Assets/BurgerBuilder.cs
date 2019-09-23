@@ -16,10 +16,10 @@ public class BurgerBuilder : MonoBehaviour
     {
         var node = other.GetComponent<BurgerNode>();
         if (node)
-            AddNode(node);
+            Attach(node);
     }
 
-    private void AddNode(BurgerNode node)
+    private void Attach(BurgerNode node)
     {
         var component = node.GetComponentInParent<IBurgerComponent>();
         if (InterfaceUtil.IsNull(component))
@@ -27,5 +27,15 @@ public class BurgerBuilder : MonoBehaviour
 
         activeNode.Disable();
         activeNode = component.AttachTo(activeNode);
+
+        if (activeNode)
+            activeNode.Enable();
+        else
+            FinishBurger();
     } 
+
+    private void FinishBurger()
+    {
+
+    }
 }

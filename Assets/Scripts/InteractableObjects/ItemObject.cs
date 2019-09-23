@@ -31,4 +31,9 @@ public class ItemObject : MonoBehaviour, IGrabbable
         Locked = false;
         this.gameObject.layer = LayerManager.InteractionLayer;
     }
+
+    public void ChangeRigidbody(Rigidbody newRigid)
+    {
+        rigidbody = newRigid;
+    }
 }

@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bded89bf75eda4c8545b90dc1875aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 0}
+  rigidbody: {fileID: 6268133023963441758}
   grabOffet: {x: 0, y: 0, z: 0}
 --- !u!65 &3512287165004827300
 BoxCollider:

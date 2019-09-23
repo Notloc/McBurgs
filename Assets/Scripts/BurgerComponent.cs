@@ -31,20 +31,35 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
         DropSelf();
         usable.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
+        BurgerNode closestNode;
+
         if (!node2)
+            closestNode = node1;
+        else
         {
-            node1.Disable();
-            this.transform.SetParent(targetNode.transform);
-            return null;
+            float dist1 = Vector3.SqrMagnitude(targetNode.transform.position - node1.transform.position);
+            float dist2 = Vector3.SqrMagnitude(targetNode.transform.position - node2.transform.position);
+
+            closestNode = (dist1 < dist2) ? node1 : node2;
         }
 
-        float dist1 = Vector3.SqrMagnitude(targetNode.transform.position - node1.transform.position);
-        float dist2 = Vector3.SqrMagnitude(targetNode.transform.position - node2.transform.position);
-
-        BurgerNode closestNode = (dist1 < dist2) ? node1 : node2;
-
         closestNode.Disable();
+
+        // Attach
         this.transform.SetParent(targetNode.transform);
+
+        // Offset so the component doesn't float but can be misaligned
+        Vector3 localOffset = this.transform.localPosition;
+        localOffset.y = 0;
+        this.transform.position -= (closestNode.transform.position - targetNode.transform.position);
+        this.transform.localPosition += localOffset;
+
+        ItemObject item = usable as ItemObject;
+        if (item)
+        {
+            Destroy(item.Rigidbody);
+            item.ChangeRigidbody(this.GetComponentInParent<Rigidbody>());
+        }
 
         if (closestNode == node1)
             return node2;

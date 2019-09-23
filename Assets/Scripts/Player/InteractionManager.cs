@@ -235,12 +235,15 @@ public class InteractionManager : PlayerComponent
         if (InterfaceUtil.IsNull(HeldItem) == false)
         {
             if (isUsingItem && !InterfaceUtil.IsNull(HeldItem as IUsable))
+            {
                 HeldItem.transform.localPosition = (HeldItem as IUsable).UseOffset;
+                HeldItem.transform.rotation = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f);
+            }
             else
+            {
                 HeldItem.transform.localPosition = HeldItem.GrabOffset;
-
-            HeldItem.transform.localRotation = Quaternion.identity;
-            HeldItem.transform.rotation = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f);
+                HeldItem.transform.rotation = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f);
+            }
         }
     }
 }

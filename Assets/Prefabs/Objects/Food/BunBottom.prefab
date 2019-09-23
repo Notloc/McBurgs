@@ -78,19 +78,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2705263780179663552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975338256554551315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f2ae03f47241b4793827fb5631ea0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startNode: {fileID: 4998905572239100091}
 --- !u!65 &2882014644480302316
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -104,6 +91,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.15, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2705263780179663552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975338256554551315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f2ae03f47241b4793827fb5631ea0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startNode: {fileID: 4998905572239100091}
 --- !u!1001 &3591780582213724300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,7 +323,8 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}
 --- !u!1 &975338256554551315 stripped
 GameObject:
