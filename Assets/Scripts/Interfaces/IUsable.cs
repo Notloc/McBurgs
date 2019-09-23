@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public interface IUsable : IGrabbable
 {
     Vector3 UseOffset { get; }
+    Quaternion UseRotation { get; }
 
     void EnableUse();
     void DisableUse();
