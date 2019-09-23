@@ -17,6 +17,19 @@ MonoBehaviour:
   amountProduced: 8
   spreadStart: {x: 0, y: -0.2, z: 0}
   spreadEnd: {x: 0, y: 0.2, z: 0}
+--- !u!135 &1267767338973252918
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975338256554551315}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2663525693482841173
 GameObject:
   m_ObjectHideFlags: 0
@@ -28,7 +41,6 @@ GameObject:
   - component: {fileID: 5921737781408935717}
   - component: {fileID: 2337400291743145065}
   - component: {fileID: 4961403869695076273}
-  - component: {fileID: 5248275762508439128}
   m_Layer: 10
   m_Name: Sphere
   m_TagString: Untagged
@@ -95,19 +107,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &5248275762508439128
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663525693482841173}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &5357162301383277023
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,6 +118,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Lettuce
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 4961403869695076273}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: tooltipData.title.text
+      value: Lettuce
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookingRate
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.r
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.g
+      value: 0.7764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: burntColor.g
+      value: 0.20784314
       objectReference: {fileID: 0}
     - target: {fileID: 237394617527604224, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
@@ -189,41 +223,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 4961403869695076273}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: tooltipData.title.text
-      value: Lettuce
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookingRate
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.r
-      value: 0.7254902
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.g
-      value: 0.7764706
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: burntColor.g
-      value: 0.20784314
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}

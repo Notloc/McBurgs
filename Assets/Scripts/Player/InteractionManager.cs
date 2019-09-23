@@ -10,7 +10,6 @@ public class InteractionManager : PlayerComponent
     [Header("Required References")]
     [SerializeField] Camera targetCamera;
     [SerializeField] Transform heldItemParent;
-    [SerializeField] Transform droppedItemPoint;
 
     [Header("Interaction Options")]
     [SerializeField] float interactionDistance = 1.5f;
@@ -40,7 +39,13 @@ public class InteractionManager : PlayerComponent
             int colliderLayer = hit.collider.gameObject.layer;
 
             if (interactionLayers.Contains(colliderLayer))
-                TargetInteractable = hit.collider.GetComponentInParent<IInteractable>();
+            {
+                var builder = hit.collider.GetComponentInParent<BurgerBuilder>();
+                if (builder)
+                    TargetInteractable = builder.GetComponent<IInteractable>();
+                else
+                    TargetInteractable = hit.collider.GetComponentInParent<IInteractable>();
+            }
             else
                 TargetInteractable = null;
 
@@ -172,6 +177,10 @@ public class InteractionManager : PlayerComponent
             StopUsingItem(item as IUsable);
         }
     }
+    public void Drop(IGrabbable grabbable)
+    {
+        DropItem(grabbable);
+    }
     //
 
     // INV FUNCTIONS
@@ -231,6 +240,7 @@ public class InteractionManager : PlayerComponent
                 HeldItem.transform.localPosition = HeldItem.GrabOffset;
 
             HeldItem.transform.localRotation = Quaternion.identity;
+            HeldItem.transform.rotation = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f);
         }
     }
 }
