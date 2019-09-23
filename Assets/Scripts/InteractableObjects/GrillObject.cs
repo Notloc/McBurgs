@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GrillObject : MonoBehaviour, IInteractable
+public class GrillObject : MonoBehaviour, IInteractable, IHaveTooltip
 {
+    [SerializeField] TooltipData tooltipData;
+    [SerializeField] Vector3 toolTipDisplayOffset;
+
+    public Vector3 DisplayOffset { get { return this.transform.rotation * toolTipDisplayOffset; } }
+    public TooltipData TooltipData { get { return tooltipData; } }
+
+    public bool IsOn { get { return isOn; } }
     bool isOn = false;
     HashSet<ICookable> grillingItems = new HashSet<ICookable>();
 
@@ -12,15 +19,26 @@ public class GrillObject : MonoBehaviour, IInteractable
         GrillItems();
     }
 
+    List<ICookable> removalList = new List<ICookable>();
     private void GrillItems()
     {
         if (isOn == false)
             return;
 
-        foreach(ICookable item in grillingItems)
+        removalList.Clear();
+
+        foreach (ICookable item in grillingItems)
         {
-            item.Cook(CookingType.Grill, Time.fixedDeltaTime);
+            // Check for deleted and disabled objects
+            if (InterfaceUtil.IsNull(item) || item.gameObject.activeInHierarchy == false)
+                removalList.Add(item);
+            else
+                item.Cook(CookingType.Grill, Time.fixedDeltaTime);
         }
+
+        // Clear out deleted items
+        foreach(ICookable item in removalList)
+            grillingItems.Remove(item);
     }
 
     // ON/OFF CODE

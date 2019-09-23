@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class ItemObject : MonoBehaviour, IGrabbable
 {
+    [Header("ItemObject")]
     [Header("Required References")]
     [SerializeField] protected Rigidbody Rigidbody;
 
+    [Header("Options")]
+    [SerializeField] Vector3 grabOffet;
+
+    public Vector3 GrabOffset { get { return grabOffet; } }
     public bool Locked { get; protected set; }
 
     public void Interact()
@@ -14,15 +19,15 @@ public class ItemObject : MonoBehaviour, IGrabbable
 
     public virtual void Lock()
     {
-        Rigidbody.isKinematic = true;
+        Rigidbody.constraints = RigidbodyConstraints.FreezeAll; 
         Locked = true;
         this.gameObject.SetLayerRecursively(LayerManager.HeldLayer);
     }
 
     public virtual void Unlock()
     {
-        Rigidbody.isKinematic = false;
+        Rigidbody.constraints = RigidbodyConstraints.None;
         Locked = false;
-        this.gameObject.SetLayerRecursively(LayerManager.DefaultLayer);
+        this.gameObject.SetLayerRecursively(LayerManager.InteractionLayer);
     }
 }

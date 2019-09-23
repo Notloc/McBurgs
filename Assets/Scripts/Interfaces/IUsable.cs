@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IUsable : IGrabbable
 {
+    Vector3 UseOffset { get; }
     void EnableUse();
     void DisableUse();
 }
