@@ -7,7 +7,7 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip, IUsable
 {
     [SerializeField] Vector3 useOffset;
     [SerializeField] Quaternion useRotation = Quaternion.identity;
-    [SerializeField] Renderer renderer;
+    [SerializeField] new Renderer renderer;
 
     [Header("Cooking Options")]
     [SerializeField] CookingType cookingMethod;
