@@ -5,6 +5,7 @@ using UnityEngine;
 public interface IGrabbable : IInteractable
 {
     Rigidbody Rigidbody { get; }
+    void ChangeRigidbody(Rigidbody newRigidbody);
 
     Vector3 GrabOffset { get; }
     bool Locked { get; }

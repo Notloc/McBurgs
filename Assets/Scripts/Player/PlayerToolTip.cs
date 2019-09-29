@@ -19,20 +19,31 @@ public class PlayerTooltip : MonoBehaviour
 
     private void LateUpdate()
     {
+        bool tooltipInput = Input.GetButtonDown(ControlBindings.TOOLTIP);
+
         // Try to get a new target
         IHaveTooltip newTarget = null;
         Collider targetCollider = interactionManager.TargetCollider;
         if (targetCollider)
             newTarget = targetCollider.GetComponentInParent<IHaveTooltip>();
 
-        if (!InterfaceUtil.IsNull(newTarget) && currentTarget != newTarget)
+        if (tooltipInput && InterfaceUtil.IsNull(newTarget) == false)
         {
-            PopulateTooltip(newTarget);
-            currentTarget = newTarget;
+            if (currentTarget != newTarget)
+            {
+                PopulateTooltip(newTarget);
+                currentTarget = newTarget;
+            }
+            else
+            {
+                currentTarget = null;
+            }
         }
 
+
+
         // Enable/Disable tooltip 
-        if ( InterfaceUtil.IsNull(currentTarget)|| currentTarget == interactionManager.HeldItem as IHaveTooltip)
+        if ( InterfaceUtil.IsNull(currentTarget) || currentTarget == interactionManager.HeldItem as IHaveTooltip)
         {
             currentTarget = null;
             tooltipCanvas.gameObject.SetActive(false);
