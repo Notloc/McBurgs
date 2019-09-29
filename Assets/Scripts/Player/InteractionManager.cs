@@ -8,11 +8,13 @@ using UnityEngine;
 public class InteractionManager : PlayerComponent
 {
     [Header("Required References")]
+    [SerializeField] PlayerController controller;
     [SerializeField] Camera targetCamera;
     [SerializeField] Transform heldItemParent;
 
     [Header("Interaction Options")]
     [SerializeField] float interactionDistance = 1.5f;
+    [SerializeField] float rotationSensitivity = 3f;
     [SerializeField] LayerMask raycastMask;
     [SerializeField] LayerMask interactionLayers; // Valid layers for interaction
 
@@ -63,7 +65,9 @@ public class InteractionManager : PlayerComponent
         UpdateTargets();
         IInteractable target = TargetInteractable;
 
-        if (target != null && target as IGrabbable == null)
+        TakeInput();
+
+        if (target != null && InterfaceUtil.IsNull(target as IGrabbable))
         {
             HandleInteractable(target);
         }
@@ -72,6 +76,20 @@ public class InteractionManager : PlayerComponent
             HandleGrabbable(target as IGrabbable);
         }
         
+    }
+
+    bool interact, use, swap, rotate;
+    private void TakeInput()
+    {
+        interact = Input.GetButtonDown(ControlBindings.INTERACT);
+        use = Input.GetButton(ControlBindings.USE_ITEM);
+        swap = Input.GetButtonDown(ControlBindings.SWAP_ITEM);
+        rotate = Input.GetButton(ControlBindings.ROTATE_ITEM);
+
+        if (rotate && InterfaceUtil.IsNull(HeldItem) == false)
+            controller.LookEnabled = false;
+        else
+            controller.LookEnabled = true;
     }
 
     private void HandleInteractable(IInteractable target)
@@ -84,10 +102,6 @@ public class InteractionManager : PlayerComponent
 
     private void HandleGrabbable(IGrabbable target)
     {
-        bool interact = Input.GetButtonDown(ControlBindings.INTERACT);
-        bool use = Input.GetButton(ControlBindings.USE_ITEM);
-        bool swap = Input.GetButtonDown(ControlBindings.SWAP_ITEM);
-
         // Swap item in hand with inv
         if (swap)
         {
@@ -118,6 +132,20 @@ public class InteractionManager : PlayerComponent
                 StopUsingItem(HeldItem as IUsable);
             }
         }
+
+        if (rotate)
+            RotateItem();
+    }
+
+    private void RotateItem()
+    {
+        if (InterfaceUtil.IsNull(HeldItem))
+            return;
+
+        float xInput = -Input.GetAxis(ControlBindings.VIEW_INPUT_X) * rotationSensitivity;
+        float yInput = Input.GetAxis(ControlBindings.VIEW_INPUT_Y) * rotationSensitivity;
+
+        HeldItem.transform.localRotation = Quaternion.Euler(yInput, xInput, 0f) * HeldItem.transform.localRotation;
     }
 
     // USE FUNCTIONS
@@ -138,6 +166,8 @@ public class InteractionManager : PlayerComponent
             return;
 
         item.DisableUse();
+        if (item.ResetRotationAfterUse)
+            item.transform.localRotation = Quaternion.identity;
 
         if (HeldItem == item as IGrabbable)
             item.transform.localPosition = item.GrabOffset;
@@ -156,9 +186,9 @@ public class InteractionManager : PlayerComponent
 
         target.Lock();
 
-        target.gameObject.transform.SetParent(heldItemParent);
-        target.gameObject.transform.localPosition = target.GrabOffset;
-        target.gameObject.transform.localRotation = Quaternion.identity;
+        target.transform.SetParent(heldItemParent);
+        target.transform.localPosition = target.GrabOffset;
+        target.transform.localRotation = Quaternion.Euler(0f, target.transform.localRotation.eulerAngles.y, 0f);
 
         HeldItem = target;
     }
@@ -238,12 +268,13 @@ public class InteractionManager : PlayerComponent
             if (isUsingItem && !InterfaceUtil.IsNull(usable))
             {
                 HeldItem.transform.localPosition = usable.UseOffset;
-                HeldItem.transform.rotation = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f) * usable.UseRotation;
+
+                if (usable.UseRotation.Equals(Quaternion.identity) == false)
+                    HeldItem.transform.rotation = Quaternion.Euler(0f, this.transform.rotation.eulerAngles.y, 0f) * usable.UseRotation;
             }
             else
             {
                 HeldItem.transform.localPosition = HeldItem.GrabOffset;
-                HeldItem.transform.localRotation = Quaternion.identity;
             }
         }
     }

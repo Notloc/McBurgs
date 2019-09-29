@@ -145,6 +145,7 @@ MonoBehaviour:
   bladeActiveTime: 0.1
   useOffset: {x: 0.2, y: 0, z: 0.3}
   useRotation: {x: 0.8, y: 0, z: 0, w: 1}
+  resetRotationAfterUse: 1
 --- !u!65 &356118166308189369
 BoxCollider:
   m_ObjectHideFlags: 0

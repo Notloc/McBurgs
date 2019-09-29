@@ -21,6 +21,8 @@ public class PlayerController : PlayerComponent
     [SerializeField] float maxXRotation = 80f;
     [SerializeField] float minXRotation = -80f;
 
+    public bool LookEnabled = true;
+
     private float cameraRotation = 0f;
 
     private void FixedUpdate()
@@ -31,6 +33,9 @@ public class PlayerController : PlayerComponent
 
     private void Rotate()
     {
+        if (LookEnabled == false)
+            return;
+
         // Body rotation
         float yRotation = Input.GetAxis(ControlBindings.VIEW_INPUT_X);
         Quaternion deltaRotation = Quaternion.Euler(0f, yRotation, 0f);

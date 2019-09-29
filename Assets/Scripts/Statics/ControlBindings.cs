@@ -16,6 +16,7 @@ public static class ControlBindings
     public static string INTERACT = "Interact";
     public static string USE_ITEM = "Use";
     public static string SWAP_ITEM = "Swap Item";
+    public static string ROTATE_ITEM = "Rotate Item";
 
     public static string TOOLTIP = "Tooltip";
 }

@@ -7,6 +7,7 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip, IUsable
 {
     [SerializeField] Vector3 useOffset;
     [SerializeField] Quaternion useRotation = Quaternion.identity;
+    [SerializeField] bool resetRotationAfterUse = false;
     [SerializeField] new Renderer renderer;
 
     [Header("Cooking Options")]
@@ -36,6 +37,7 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip, IUsable
 
     public Vector3 UseOffset { get { return useOffset; } }
     public Quaternion UseRotation { get { return useRotation; } }
+    public bool ResetRotationAfterUse { get { return resetRotationAfterUse; } }
 
     public UnityAction OnEnableEvent { get; set; }
     public UnityAction OnDisableEvent { get; set; }
