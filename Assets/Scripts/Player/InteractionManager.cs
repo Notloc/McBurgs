@@ -167,7 +167,7 @@ public class InteractionManager : PlayerComponent
 
         item.DisableUse();
         if (item.ResetRotationAfterUse)
-            item.transform.localRotation = Quaternion.identity;
+            item.transform.localRotation = item.GrabRotation;
 
         if (HeldItem == item as IGrabbable)
             item.transform.localPosition = item.GrabOffset;
@@ -188,7 +188,9 @@ public class InteractionManager : PlayerComponent
 
         target.transform.SetParent(heldItemParent);
         target.transform.localPosition = target.GrabOffset;
-        target.transform.localRotation = Quaternion.Euler(0f, target.transform.localRotation.eulerAngles.y, 0f);
+
+        if (target.GrabRotation.Equals(Quaternion.identity) == false)
+            target.transform.localRotation = Quaternion.Euler(0f, target.transform.localRotation.eulerAngles.y, 0f);
 
         HeldItem = target;
     }

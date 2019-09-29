@@ -10,9 +10,11 @@ public class ItemObject : MonoBehaviour, IGrabbable
 
     [Header("Options")]
     [SerializeField] Vector3 grabOffet;
+    [SerializeField] Quaternion grabRotation = Quaternion.identity;
 
     public Rigidbody Rigidbody { get { return rigidbody; } }
     public Vector3 GrabOffset { get { return grabOffet; } }
+    public Quaternion GrabRotation { get { return grabRotation; } }
     public bool Locked { get; protected set; }
 
     public void Interact()

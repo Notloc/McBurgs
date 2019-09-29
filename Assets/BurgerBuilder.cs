@@ -10,12 +10,12 @@ public class BurgerBuilder : MonoBehaviour
     [SerializeField] BurgerNode startNode;
 
     [Header("Options")]
-    [SerializeField] float attachOffsetLimit = 0.2f;
-    [SerializeField] float centerOfMassRadiusLimit = 0.35f;
+    [SerializeField] [Range(0f, 0.1f)] float attachOffsetLimit = 0.03f;
+    [SerializeField] [Range(0f, 0.2f)] float centerOfMassRadiusLimit = 0.15f;
     [SerializeField] float detachmentForce = 5f;
     [Space]
+    [SerializeField] [Range(0f,0.1f)] float animationStrength = 0.01f;
     [SerializeField] float animationLength = 0.4f;
-    [SerializeField] [Range(0.1f,1.5f)] float animationStrength = 0.1f;
 
     BurgerNode activeNode;
     BurgerNode previousNode;
