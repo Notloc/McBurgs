@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950012810498247620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0.2}
+  m_LocalPosition: {x: 0, y: 1.65, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8690415314957154052}
@@ -146,7 +146,7 @@ Transform:
   m_Children:
   - {fileID: 4793061517253047683}
   - {fileID: 4135058445585159386}
-  - {fileID: 5145152481051007016}
+  - {fileID: 4514225168797692938}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -195,10 +195,10 @@ MonoBehaviour:
   targetCamera: {fileID: 6327642950582297385}
   movingMaterial: {fileID: 13400000, guid: 589e763cb9847be4ca5045854d6c16a5, type: 2}
   stationaryMaterial: {fileID: 13400000, guid: 7b3b42b17348ad0469cb3610d23c53e4, type: 2}
-  movementForce: 650
+  movementForce: 700
   sprintMultiplier: 1.5
-  maxMovementSpeed: 1.75
-  sensitivity: 2
+  maxMovementSpeed: 2.35
+  sensitivity: 5
   maxXRotation: 80
   minXRotation: -80
 --- !u!114 &6559895938970231549
@@ -314,7 +314,7 @@ CapsuleCollider:
   m_Height: 1.9999999
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1001 &2179599972680711643
+--- !u!1001 &7493287831797109241
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -325,11 +325,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tooltip
-      objectReference: {fileID: 0}
-    - target: {fileID: 2239393392215517392, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6437964160517432819, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}
@@ -386,31 +381,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2027260535650020368, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 4252627322999698293, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}
       propertyPath: interactionManager
       value: 
       objectReference: {fileID: 6559895938970231549}
-    - target: {fileID: 1563541126343845630, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 3310771891330447422, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
-        type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 6327642950582297385}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d064eefc4a6d9649a98e8c4b47a804d, type: 3}
---- !u!4 &5145152481051007016 stripped
+--- !u!4 &4514225168797692938 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6437964160517432819, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
     type: 3}
-  m_PrefabInstance: {fileID: 2179599972680711643}
+  m_PrefabInstance: {fileID: 7493287831797109241}
   m_PrefabAsset: {fileID: 0}

@@ -25,14 +25,14 @@ public class PlayerTooltip : MonoBehaviour
         if (targetCollider)
             newTarget = targetCollider.GetComponentInParent<IHaveTooltip>();
 
-        if (newTarget != null && currentTarget != newTarget)
+        if (!InterfaceUtil.IsNull(newTarget) && currentTarget != newTarget)
         {
             PopulateTooltip(newTarget);
             currentTarget = newTarget;
         }
 
         // Enable/Disable tooltip 
-        if (currentTarget == null || currentTarget == (interactionManager.HeldItem as IHaveTooltip))
+        if ( InterfaceUtil.IsNull(currentTarget)|| currentTarget == interactionManager.HeldItem as IHaveTooltip)
         {
             currentTarget = null;
             tooltipCanvas.gameObject.SetActive(false);

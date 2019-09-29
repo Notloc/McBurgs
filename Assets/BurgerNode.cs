@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class BurgerNode : MonoBehaviour
 {
-    [SerializeField] Collider nodeCollider;
+    [SerializeField] Collider[] nodeColliders;
 
     public void Enable()
     {
-        nodeCollider.enabled = true;
+        foreach(Collider nodeCollider in nodeColliders)
+            nodeCollider.enabled = true;
     }
 
     public void Disable()
     {
-        nodeCollider.enabled = false;
+        foreach (Collider nodeCollider in nodeColliders)
+            nodeCollider.enabled = false;
     }
 
     

@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startNode: {fileID: 4998905572239100091}
+  animationLength: 0.25
+  animationStrength: 0.2
 --- !u!1001 &3591780582213724300
 PrefabInstance:
   m_ObjectHideFlags: 0
