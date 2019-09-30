@@ -8,6 +8,7 @@ public interface IGrabbable : IInteractable
     void ChangeRigidbody(Rigidbody newRigidbody);
 
     Vector3 GrabOffset { get; }
+    Quaternion GrabRotation { get; }
     bool Locked { get; }
 
     void Lock();

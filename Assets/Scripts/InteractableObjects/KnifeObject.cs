@@ -5,24 +5,41 @@ using UnityEngine.Events;
 
 public class KnifeObject : ItemObject, IUsable
 {
+    [Header("Required References")]
+    [SerializeField] Collider regularCollisionBox;
+    [SerializeField] Collider bladeCollisionBox;
+
     [Header("Options")]
     [SerializeField] float bladeActiveTime;
     [Space]
     [SerializeField] Vector3 useOffset = Vector3.zero;
     [SerializeField] Quaternion useRotation = Quaternion.identity;
+    [SerializeField] bool ignorePositionSmoothing = true;
+    [SerializeField] bool resetRotationAfterUse = true;
 
     public Vector3 UseOffset { get { return useOffset; } }
     public Quaternion UseRotation { get { return useRotation; } }
+    public bool IgnorePositionSmoothing { get { return ignorePositionSmoothing; } }
+    public bool ResetRotationAfterUse { get { return resetRotationAfterUse; } }
 
     bool knifeEnabled = false;
 
     public UnityAction OnEnableEvent { get; set; }
     public UnityAction OnDisableEvent { get; set; }
 
+    private void Awake()
+    {
+        bladeCollisionBox.enabled = false;
+        regularCollisionBox.enabled = true;
+    }
+
     public void EnableUse()
     {
         knifeEnabled = true;
         OnEnableEvent?.Invoke();
+
+        bladeCollisionBox.enabled = true;
+        regularCollisionBox.enabled = false;
 
         StartCoroutine(UseTimer(bladeActiveTime));
     }
@@ -43,6 +60,10 @@ public class KnifeObject : ItemObject, IUsable
     {
         knifeEnabled = false;
         OnDisableEvent?.Invoke();
+
+        bladeCollisionBox.enabled = false;
+        regularCollisionBox.enabled = true;
+
         StopAllCoroutines();
     }
 
