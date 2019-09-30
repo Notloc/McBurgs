@@ -10,10 +10,12 @@ public class KnifeObject : ItemObject, IUsable
     [Space]
     [SerializeField] Vector3 useOffset = Vector3.zero;
     [SerializeField] Quaternion useRotation = Quaternion.identity;
+    [SerializeField] bool ignorePositionSmoothing = true;
     [SerializeField] bool resetRotationAfterUse = true;
 
     public Vector3 UseOffset { get { return useOffset; } }
     public Quaternion UseRotation { get { return useRotation; } }
+    public bool IgnorePositionSmoothing { get { return ignorePositionSmoothing; } }
     public bool ResetRotationAfterUse { get { return resetRotationAfterUse; } }
 
     bool knifeEnabled = false;

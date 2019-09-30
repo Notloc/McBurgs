@@ -6,6 +6,8 @@ public interface IUsable : IGrabbable
 {
     Vector3 UseOffset { get; }
     Quaternion UseRotation { get; }
+
+    bool IgnorePositionSmoothing { get; }
     bool ResetRotationAfterUse { get; }
 
     void EnableUse();
