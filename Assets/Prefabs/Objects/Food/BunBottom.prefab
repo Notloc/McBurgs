@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7113142858333808922}
   m_Layer: 10
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: BurgerBuilder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,6 +104,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startNode: {fileID: 4998905572239100091}
+  attachOffsetLimit: 0.2
+  centerOfMassRadiusLimit: 0.35
+  detachmentForce: 50
   animationLength: 0.25
   animationStrength: 0.2
 --- !u!1001 &3591780582213724300
@@ -117,6 +120,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BuildingNode
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317878229617493018, guid: fb94a170310aef64391e48ee5262b719,
+        type: 3}
+      propertyPath: m_TagString
+      value: BurgerBuilder
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
@@ -178,6 +186,16 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3683654429096017488, guid: fb94a170310aef64391e48ee5262b719,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159031948373025732, guid: fb94a170310aef64391e48ee5262b719,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb94a170310aef64391e48ee5262b719, type: 3}
 --- !u!4 &1441004877054848455 stripped
@@ -209,6 +227,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BunBottom
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175038671335199180, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: m_TagString
+      value: BurgerBuilder
       objectReference: {fileID: 0}
     - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
