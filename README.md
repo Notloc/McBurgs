@@ -4,7 +4,7 @@ A long time ago Citizen Burger Disorder inspired me to learn Unity, time to see 
 
 
 ## Chop Food!
-![](https://i.imgur.com/Iw3MaFR.mp4)
+![](https://media.giphy.com/media/J4sWf1bgUr7fQpo4GY/giphy.gif)
 
 ## Build Burgers!
-![](https://i.imgur.com/WLCY4ML.mp4)
+![](https://media.giphy.com/media/Lq7KmVmJkEbEERx587/giphy.gif)
