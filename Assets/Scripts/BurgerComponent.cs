@@ -54,6 +54,10 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
         this.transform.position -= (closestNode.transform.position - targetNode.transform.position);
         this.transform.localPosition += localOffset;
 
+        // Cancel rotation, excluding y axis
+        Vector3 rot = this.transform.localRotation.eulerAngles;
+        this.transform.localRotation = Quaternion.Euler(0f, rot.y, 0f);
+
         ItemObject item = usable as ItemObject;
         if (item)
         {

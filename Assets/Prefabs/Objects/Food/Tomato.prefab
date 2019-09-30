@@ -27,7 +27,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cutVersionOfFoodPrefab: {fileID: 4651713195071327274, guid: fed08197d14b87e41a36906ac271c599,
     type: 3}
-  amountProduced: 20
+  amountProduced: 8
   spreadStart: {x: 0, y: 0, z: 0}
   spreadEnd: {x: 0, y: 0, z: 0}
 --- !u!1 &2663525693482841173
@@ -207,6 +207,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tomato
       objectReference: {fileID: 0}
+    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: node1
+      value: 
+      objectReference: {fileID: 8014963608034873248}
     - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
       propertyPath: renderer
@@ -317,11 +322,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.15
       objectReference: {fileID: 0}
-    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: node1
-      value: 
-      objectReference: {fileID: 8014963608034873248}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}
 --- !u!1 &975338256554551315 stripped

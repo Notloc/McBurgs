@@ -6,7 +6,7 @@ public class ItemObject : MonoBehaviour, IGrabbable
 {
     [Header("ItemObject")]
     [Header("Required References")]
-    [SerializeField] protected Rigidbody rigidbody;
+    [SerializeField] new protected Rigidbody rigidbody;
 
     [Header("Options")]
     [SerializeField] Vector3 grabOffet;
