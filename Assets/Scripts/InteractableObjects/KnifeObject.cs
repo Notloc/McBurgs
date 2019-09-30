@@ -5,6 +5,10 @@ using UnityEngine.Events;
 
 public class KnifeObject : ItemObject, IUsable
 {
+    [Header("Required References")]
+    [SerializeField] Collider regularCollisionBox;
+    [SerializeField] Collider bladeCollisionBox;
+
     [Header("Options")]
     [SerializeField] float bladeActiveTime;
     [Space]
@@ -23,10 +27,19 @@ public class KnifeObject : ItemObject, IUsable
     public UnityAction OnEnableEvent { get; set; }
     public UnityAction OnDisableEvent { get; set; }
 
+    private void Awake()
+    {
+        bladeCollisionBox.enabled = false;
+        regularCollisionBox.enabled = true;
+    }
+
     public void EnableUse()
     {
         knifeEnabled = true;
         OnEnableEvent?.Invoke();
+
+        bladeCollisionBox.enabled = true;
+        regularCollisionBox.enabled = false;
 
         StartCoroutine(UseTimer(bladeActiveTime));
     }
@@ -47,6 +60,10 @@ public class KnifeObject : ItemObject, IUsable
     {
         knifeEnabled = false;
         OnDisableEvent?.Invoke();
+
+        bladeCollisionBox.enabled = false;
+        regularCollisionBox.enabled = true;
+
         StopAllCoroutines();
     }
 

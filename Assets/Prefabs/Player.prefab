@@ -218,8 +218,9 @@ MonoBehaviour:
   targetCamera: {fileID: 6327642950582297385}
   heldItemParent: {fileID: 8690415314957154052}
   interactionDistance: 2.5
-  rotationSensitivity: 3
-  itemPositionSmoothing: 5
+  rotationSensitivity: 4
+  itemPositionSmoothing: 8
+  itemRotationSmoothing: 30
   raycastMask:
     serializedVersion: 2
     m_Bits: 1025

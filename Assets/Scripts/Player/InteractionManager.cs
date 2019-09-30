@@ -16,6 +16,7 @@ public class InteractionManager : PlayerComponent
     [SerializeField] float interactionDistance = 1.5f;
     [SerializeField] float rotationSensitivity = 3f;
     [SerializeField] float itemPositionSmoothing = 2f;
+    [SerializeField] float itemRotationSmoothing = 15f;
     [SerializeField] LayerMask raycastMask;
     [SerializeField] LayerMask interactionLayers; // Valid layers for interaction
 
@@ -259,7 +260,8 @@ public class InteractionManager : PlayerComponent
 
     // Drive the held objects position to keep it properly positioned
     // Held object is NOT kinematic, as it needs to interact with kinematic objects
-    Vector3 heldTargetPosition = Vector3.zero;
+    Vector3 heldItemTargetPosition = Vector3.zero;
+    Quaternion heldItemTargetRotation = Quaternion.identity;
     private void PositionHeldItem()
     {
         if (InterfaceUtil.IsNull(HeldItem) == false)
@@ -267,22 +269,26 @@ public class InteractionManager : PlayerComponent
             IUsable usable = HeldItem as IUsable;
             if (isUsingItem && !InterfaceUtil.IsNull(usable))
             {
-                heldTargetPosition = usable.UseOffset;
+                heldItemTargetPosition = usable.UseOffset;
 
                 // Skip the position smoothing if desired
                 if (usable.IgnorePositionSmoothing)
                     HeldItem.transform.localPosition = usable.UseOffset;
-                
+
                 if (usable.UseRotation.Equals(Quaternion.identity) == false)
-                    HeldItem.transform.rotation = targetCamera.transform.rotation * usable.UseRotation;
+                {
+                    Quaternion localCameraRotation = Quaternion.Inverse(this.transform.rotation) * targetCamera.transform.rotation;
+                    heldItemTargetRotation = localCameraRotation * usable.UseRotation;
+                }
             }
             else
             {
-                heldTargetPosition = HeldItem.GrabOffset;
+                heldItemTargetPosition = HeldItem.GrabOffset;
+                heldItemTargetRotation = HeldItem.transform.localRotation;
             }
 
-            HeldItem.transform.localPosition = Vector3.Lerp(HeldItem.transform.localPosition, heldTargetPosition, Time.deltaTime * itemPositionSmoothing);
-
+            HeldItem.transform.localPosition = Vector3.Lerp(HeldItem.transform.localPosition, heldItemTargetPosition, Time.deltaTime * itemPositionSmoothing);
+            HeldItem.transform.localRotation = Quaternion.Slerp(HeldItem.transform.localRotation, heldItemTargetRotation, Time.deltaTime * itemRotationSmoothing);
         }
     }
 }
