@@ -18,5 +18,21 @@ public class BurgerNode : MonoBehaviour
             nodeCollider.enabled = false;
     }
 
-    
+    /// <summary>
+    /// Checks if the node is above the BurgerComponent it is attached to
+    /// </summary>
+    /// <returns></returns>
+    public bool IsAboveBurgerComponent()
+    {
+        float yPos = 0f;
+
+        IBurgerComponent component = GetComponentInParent<IBurgerComponent>();
+        if (InterfaceUtil.IsNull(component) == false)
+            yPos = component.transform.position.y;
+
+        if (this.transform.position.y > yPos)
+            return true;
+
+        return false;
+    }
 }

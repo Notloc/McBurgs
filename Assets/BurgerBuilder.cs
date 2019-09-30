@@ -35,7 +35,17 @@ public class BurgerBuilder : MonoBehaviour
 
         var node = other.GetComponent<BurgerNode>();
         if (node)
-            Attach(node);
+            if (ValidateCollision(node))
+                Attach(node);
+    }
+
+    private bool ValidateCollision(BurgerNode node)
+    {
+        if (!activeNode || !node)
+            return false;
+
+        // Valid collision only if the nodes are not on the same side of the burger components
+        return (activeNode.IsAboveBurgerComponent() != node.IsAboveBurgerComponent());
     }
 
     private void Attach(BurgerNode node)
