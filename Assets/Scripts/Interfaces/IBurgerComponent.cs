@@ -9,5 +9,5 @@ public interface IBurgerComponent : IGameObject
     /// </summary>
     /// <param name="targetNode"></param>
     /// <returns></returns>
-    BurgerNode AttachTo(BurgerNode targetNode);
+    BurgerNode AttachTo(BurgerNode targetNode, BurgerNode myNode);
 }

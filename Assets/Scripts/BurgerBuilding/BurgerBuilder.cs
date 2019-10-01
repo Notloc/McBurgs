@@ -47,7 +47,10 @@ public class BurgerBuilder : MonoBehaviour
             return false;
 
         // Valid collision only if the nodes are not on the same side of the burger components
-        return (activeNode.IsAboveBurgerComponent() != node.IsAboveBurgerComponent());
+        bool activeAbove = activeNode.IsAboveBurgerComponent();
+        bool newAbove = node.IsAboveBurgerComponent();
+
+        return (activeAbove != newAbove);
     }
 
     private void Attach(BurgerNode node)
@@ -59,7 +62,7 @@ public class BurgerBuilder : MonoBehaviour
         previousNode = activeNode;
         previousNode.Disable();
 
-        activeNode = component.AttachTo(activeNode);
+        activeNode = component.AttachTo(activeNode, node);
 
         burgerComponents.Add(component);
         StartCoroutine(AttachAnimation());

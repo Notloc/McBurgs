@@ -6,8 +6,8 @@ using UnityEngine;
 public class BurgerComponent : MonoBehaviour, IBurgerComponent
 {
     [Header("Nodes")]
-    [SerializeField] BurgerNode node1;
-    [SerializeField] BurgerNode node2;
+    [SerializeField] BurgerNode topNode;
+    [SerializeField] BurgerNode bottomNode;
 
     IUsable usable;
 
@@ -18,43 +18,42 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
         // Register for IUseable events to enable/disable build nodes
         usable = GetComponent<IUsable>();
 
-        usable.OnEnableEvent += node1.Enable;
-        usable.OnDisableEvent += node1.Disable;
+        usable.OnEnableEvent += topNode.Enable;
+        usable.OnDisableEvent += topNode.Disable;
 
-        if (node2)
+        if (bottomNode)
         {
-            usable.OnEnableEvent += node2.Enable;
-            usable.OnDisableEvent += node2.Disable;
+            usable.OnEnableEvent += bottomNode.Enable;
+            usable.OnDisableEvent += bottomNode.Disable;
         }
     }
 
-    public BurgerNode AttachTo(BurgerNode targetNode)
+    public BurgerNode AttachTo(BurgerNode targetNode, BurgerNode selfNode)
     {
+        // selfNode must be ours
+        if (selfNode != topNode && selfNode != bottomNode)
+            return targetNode;
+
         DropSelf();
         usable.Rigidbody.constraints = RigidbodyConstraints.FreezeAll;
 
-        BurgerNode closestNode;
-
-        if (!node2)
-            closestNode = node1;
-        else
-        {
-            float dist1 = Vector3.SqrMagnitude(targetNode.transform.position - node1.transform.position);
-            float dist2 = Vector3.SqrMagnitude(targetNode.transform.position - node2.transform.position);
-
-            closestNode = (dist1 < dist2) ? node1 : node2;
-        }
-
-        closestNode.Disable();
+        selfNode.Disable();
 
         // Attach
         this.transform.SetParent(targetNode.transform);
 
-        // Offset so the component doesn't float but can be misaligned
+        // Position the component nicely
+        //
+        // Cache localoffset without y
         Vector3 localOffset = this.transform.localPosition;
         localOffset.y = 0;
-        this.transform.position -= (closestNode.transform.position - targetNode.transform.position);
+        // Reset local position
+        this.transform.localPosition = Vector3.zero;
+        // Move position based on node positions
+        this.transform.position -= (selfNode.transform.position - targetNode.transform.position);
+        // Reapply offset so the burger can be messy
         this.transform.localPosition += localOffset;
+        //
 
         // Cancel rotation, excluding y axis
         Vector3 rot = this.transform.localRotation.eulerAngles;
@@ -67,10 +66,14 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
             item.ChangeRigidbody(this.GetComponentInParent<Rigidbody>());
         }
 
-        if (closestNode == node1)
-            return node2;
+        if (selfNode == topNode)
+        {
+            // Rotate 180, as we need to be upside down
+            this.transform.localRotation *= Quaternion.Euler(180f, 0, 0);
+            return bottomNode;
+        }
         else
-            return node1;
+            return topNode;
     }
 
     private void DropSelf()
