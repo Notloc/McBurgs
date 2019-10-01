@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 9049749402380805210}
+  rigid: {fileID: 7182571765341177862}
   targetCamera: {fileID: 6327642950582297385}
   heldItemParent: {fileID: 8690415314957154052}
   interactionDistance: 2.5

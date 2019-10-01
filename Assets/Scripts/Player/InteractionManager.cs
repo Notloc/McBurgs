@@ -9,6 +9,7 @@ public class InteractionManager : PlayerComponent
 {
     [Header("Required References")]
     [SerializeField] PlayerController controller;
+    [SerializeField] Rigidbody rigid;
     [SerializeField] Camera targetCamera;
     [SerializeField] Transform heldItemParent;
 
@@ -262,10 +263,14 @@ public class InteractionManager : PlayerComponent
     // Held object is NOT kinematic, as it needs to interact with kinematic objects
     Vector3 heldItemTargetPosition = Vector3.zero;
     Quaternion heldItemTargetRotation = Quaternion.identity;
+    Quaternion previousRotation = Quaternion.identity;
     private void PositionHeldItem()
     {
         if (InterfaceUtil.IsNull(HeldItem) == false)
         {
+            Quaternion deltaRot = Quaternion.Inverse(previousRotation) * rigid.rotation;
+            HeldItem.transform.rotation = deltaRot * HeldItem.transform.rotation;
+
             IUsable usable = HeldItem as IUsable;
             if (isUsingItem && !InterfaceUtil.IsNull(usable))
             {
@@ -290,5 +295,7 @@ public class InteractionManager : PlayerComponent
             HeldItem.transform.localPosition = Vector3.Lerp(HeldItem.transform.localPosition, heldItemTargetPosition, Time.deltaTime * itemPositionSmoothing);
             HeldItem.transform.localRotation = Quaternion.Slerp(HeldItem.transform.localRotation, heldItemTargetRotation, Time.deltaTime * itemRotationSmoothing);
         }
+
+        previousRotation = rigid.rotation;
     }
 }
