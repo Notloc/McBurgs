@@ -62,7 +62,7 @@ public class BurgerBuilder : MonoBehaviour
         previousNode = activeNode;
         previousNode.Disable();
 
-        activeNode = component.AttachTo(activeNode, node);
+        activeNode = component.AttachTo(this, activeNode, node);
 
         burgerComponents.Add(component);
         StartCoroutine(AttachAnimation());

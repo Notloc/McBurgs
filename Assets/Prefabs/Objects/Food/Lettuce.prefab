@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!135 &1267767338973252918
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975338256554551315}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4672706863814744975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975338256554551315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 986c32f55a046614f8de3a1a79880234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cutVersionOfFoodPrefab: {fileID: 4651713195071327274, guid: 96bac148d7dcac246a183082eaef6720,
-    type: 3}
-  amountProduced: 8
-  spreadStart: {x: 0, y: -0.2, z: 0}
-  spreadEnd: {x: 0, y: 0.2, z: 0}
 --- !u!1 &2663525693482841173
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +77,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &1267767338973252918
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975338256554551315}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4672706863814744975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975338256554551315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 986c32f55a046614f8de3a1a79880234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutVersionOfFoodPrefab: {fileID: 4651713195071327274, guid: 96bac148d7dcac246a183082eaef6720,
+    type: 3}
+  amountProduced: 8
+  spreadStart: {x: 0, y: -0.2, z: 0}
+  spreadEnd: {x: 0, y: 0.2, z: 0}
 --- !u!1001 &2231889159886589653
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ PrefabInstance:
     - target: {fileID: 1317878229617493018, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_Name
-      value: BuildingNode
+      value: BottomNode
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
@@ -273,6 +273,11 @@ PrefabInstance:
     - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
       propertyPath: node1
+      value: 
+      objectReference: {fileID: 7673707242774015714}
+    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: bottomNode
       value: 
       objectReference: {fileID: 7673707242774015714}
     - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,

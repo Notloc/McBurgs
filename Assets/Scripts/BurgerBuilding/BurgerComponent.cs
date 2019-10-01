@@ -18,9 +18,11 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
         // Register for IUseable events to enable/disable build nodes
         usable = GetComponent<IUsable>();
 
-        usable.OnEnableEvent += topNode.Enable;
-        usable.OnDisableEvent += topNode.Disable;
-
+        if (topNode)
+        {
+            usable.OnEnableEvent += topNode.Enable;
+            usable.OnDisableEvent += topNode.Disable;
+        }
         if (bottomNode)
         {
             usable.OnEnableEvent += bottomNode.Enable;
@@ -28,7 +30,7 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
         }
     }
 
-    public BurgerNode AttachTo(BurgerNode targetNode, BurgerNode selfNode)
+    public BurgerNode AttachTo(BurgerBuilder builder, BurgerNode targetNode, BurgerNode selfNode)
     {
         // selfNode must be ours
         if (selfNode != topNode && selfNode != bottomNode)
@@ -55,9 +57,11 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
         this.transform.localPosition += localOffset;
         //
 
-        // Cancel rotation, excluding y axis
-        Vector3 rot = this.transform.localRotation.eulerAngles;
-        this.transform.localRotation = Quaternion.Euler(0f, rot.y, 0f);
+        // Align rotation with builder and apply local spin
+        Vector3 rot = this.transform.rotation.eulerAngles;
+
+        this.transform.rotation = builder.transform.rotation;
+        this.transform.localRotation *= Quaternion.Euler(0f, rot.y, 0f);
 
         ItemObject item = usable as ItemObject;
         if (item)

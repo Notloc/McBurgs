@@ -1,35 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!135 &1172681548585696077
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975338256554551315}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7142646729967732887
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975338256554551315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 986c32f55a046614f8de3a1a79880234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cutVersionOfFoodPrefab: {fileID: 4651713195071327274, guid: fed08197d14b87e41a36906ac271c599,
-    type: 3}
-  amountProduced: 8
-  spreadStart: {x: 0, y: 0, z: 0}
-  spreadEnd: {x: 0, y: 0, z: 0}
 --- !u!1 &2663525693482841173
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,8 +28,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4150641565471599324}
+  m_Children: []
   m_Father: {fileID: 5265573964343864799}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -108,17 +77,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &1172681548585696077
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975338256554551315}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7142646729967732887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975338256554551315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 986c32f55a046614f8de3a1a79880234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutVersionOfFoodPrefab: {fileID: 4651713195071327274, guid: fed08197d14b87e41a36906ac271c599,
+    type: 3}
+  amountProduced: 8
+  spreadStart: {x: 0, y: 0, z: 0}
+  spreadEnd: {x: 0, y: 0, z: 0}
 --- !u!1001 &1999001915294019479
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 5921737781408935717}
+    m_TransformParent: {fileID: 5265573964343864799}
     m_Modifications:
     - target: {fileID: 1317878229617493018, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_Name
-      value: BuildingNode
+      value: BottomNode
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
@@ -128,7 +127,7 @@ PrefabInstance:
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -0.49999988
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
@@ -138,17 +137,17 @@ PrefabInstance:
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
@@ -158,7 +157,7 @@ PrefabInstance:
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
@@ -177,12 +176,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb94a170310aef64391e48ee5262b719, type: 3}
---- !u!4 &4150641565471599324 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
-    type: 3}
-  m_PrefabInstance: {fileID: 1999001915294019479}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8014963608034873248 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8396749613607346231, guid: fb94a170310aef64391e48ee5262b719,
@@ -280,6 +273,11 @@ PrefabInstance:
     - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
       propertyPath: node1
+      value: 
+      objectReference: {fileID: 8014963608034873248}
+    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: bottomNode
       value: 
       objectReference: {fileID: 8014963608034873248}
     - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
