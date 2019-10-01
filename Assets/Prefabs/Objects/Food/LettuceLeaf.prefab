@@ -110,7 +110,7 @@ PrefabInstance:
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.005
+      value: -0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
@@ -157,6 +157,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3683654429096017488, guid: fb94a170310aef64391e48ee5262b719,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159031948373025732, guid: fb94a170310aef64391e48ee5262b719,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb94a170310aef64391e48ee5262b719, type: 3}
 --- !u!114 &7963225140011297567 stripped
@@ -182,51 +192,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LettuceLeaf
-      objectReference: {fileID: 0}
-    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: node1
-      value: 
-      objectReference: {fileID: 3405741097680620529}
-    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: node2
-      value: 
-      objectReference: {fileID: 7963225140011297567}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 5710541042151200097}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: tooltipData.title.text
-      value: Leaf Lettuce
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookingRate
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.r
-      value: 0.7254902
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.g
-      value: 0.7764706
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: burntColor.g
-      value: 0.20784314
       objectReference: {fileID: 0}
     - target: {fileID: 237394617527604224, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
@@ -298,6 +263,56 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: node1
+      value: 
+      objectReference: {fileID: 3405741097680620529}
+    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: node2
+      value: 
+      objectReference: {fileID: 7963225140011297567}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 5710541042151200097}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: tooltipData.title.text
+      value: Leaf Lettuce
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookingRate
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.r
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.g
+      value: 0.7764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: burntColor.g
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: foodType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}
 --- !u!1 &975338256554551315 stripped
@@ -332,7 +347,7 @@ PrefabInstance:
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.005
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 2461194269177349451, guid: fb94a170310aef64391e48ee5262b719,
         type: 3}
@@ -378,6 +393,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683654429096017488, guid: fb94a170310aef64391e48ee5262b719,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5159031948373025732, guid: fb94a170310aef64391e48ee5262b719,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.01
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb94a170310aef64391e48ee5262b719, type: 3}

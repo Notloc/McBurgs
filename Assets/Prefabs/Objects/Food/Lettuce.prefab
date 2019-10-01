@@ -200,41 +200,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lettuce
       objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 4961403869695076273}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: tooltipData.title.text
-      value: Lettuce
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookingRate
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.r
-      value: 0.7254902
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.g
-      value: 0.7764706
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: burntColor.g
-      value: 0.20784314
-      objectReference: {fileID: 0}
     - target: {fileID: 237394617527604224, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -310,6 +275,46 @@ PrefabInstance:
       propertyPath: node1
       value: 
       objectReference: {fileID: 7673707242774015714}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 4961403869695076273}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: tooltipData.title.text
+      value: Lettuce
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookingRate
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.r
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.g
+      value: 0.7764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: burntColor.g
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: foodType
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}
 --- !u!1 &975338256554551315 stripped
