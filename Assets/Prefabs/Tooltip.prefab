@@ -124,7 +124,7 @@ RectTransform:
   m_GameObject: {fileID: 2027260535650020368}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0025, y: 0.0025, z: 0.0025}
+  m_LocalScale: {x: 0.0015, y: 0.0015, z: 0.0015}
   m_Children:
   - {fileID: 858307916734629565}
   m_Father: {fileID: 6437964160517432819}
@@ -134,7 +134,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 300, y: 400}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!223 &3310771891330447422
 Canvas:
   m_ObjectHideFlags: 0
@@ -244,6 +244,8 @@ MonoBehaviour:
   valueEntryGuiPrefab: {fileID: 4088328205900526572, guid: fadc1dd6adb02f540855ec7c44d5fcd8,
     type: 3}
   progressEntryGuiPrefab: {fileID: 4747453594246200641, guid: cf30759158f60dc4da5365efab4fdc26,
+    type: 3}
+  burgerEntryGuiPrefab: {fileID: 7931296457190177546, guid: bab4e2ea15ad05349b8251bf3c2379e7,
     type: 3}
   interactionManager: {fileID: 0}
   tooltipCanvas: {fileID: 3310771891330447422}
