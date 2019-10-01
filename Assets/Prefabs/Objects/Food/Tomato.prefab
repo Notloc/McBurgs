@@ -207,51 +207,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tomato
       objectReference: {fileID: 0}
-    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: node1
-      value: 
-      objectReference: {fileID: 8014963608034873248}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 4961403869695076273}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: tooltipData.title.text
-      value: Tomato
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookingRate
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.r
-      value: 0.6415094
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.g
-      value: 0.009761664
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: burntColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: burntColor.r
-      value: 0.2509804
-      objectReference: {fileID: 0}
     - target: {fileID: 237394617527604224, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -321,6 +276,56 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: node1
+      value: 
+      objectReference: {fileID: 8014963608034873248}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 4961403869695076273}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: tooltipData.title.text
+      value: Tomato
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookingRate
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.r
+      value: 0.6415094
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.g
+      value: 0.009761664
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: burntColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: burntColor.r
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: foodType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}

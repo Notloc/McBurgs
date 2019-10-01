@@ -9,7 +9,8 @@ public struct TooltipEntry
     {
         Text,
         Value,
-        ProgressBar
+        ProgressBar,
+        BurgerScore
     }
 
     public TooltipEntryType entryType;

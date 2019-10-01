@@ -11,6 +11,8 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
 
     IUsable usable;
 
+    public IFood Food => throw new System.NotImplementedException();
+
     private void Awake()
     {
         // Register for IUseable events to enable/disable build nodes

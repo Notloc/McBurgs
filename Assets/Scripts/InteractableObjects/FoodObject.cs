@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class FoodObject : ItemObject, ICookable, IHaveTooltip, IUsable
+public class FoodObject : ItemObject, IFood, ICookable, IHaveTooltip, IUsable
 {
     [SerializeField] Vector3 useOffset;
     [SerializeField] Quaternion useRotation = Quaternion.identity;
     [SerializeField] bool ignorePositionSmoothing = false;
     [SerializeField] bool resetRotationAfterUse = false;
     [SerializeField] new Renderer renderer;
+
+    [Header("Food Options")]
+    [SerializeField] FoodType foodType;
 
     [Header("Cooking Options")]
     [SerializeField] CookingType cookingMethod;
@@ -21,6 +24,7 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip, IUsable
     [SerializeField] TooltipData tooltipData;
     [SerializeField] Vector3 displayOffset;
 
+    // Tooltip
     public TooltipData TooltipData { get { return tooltipData; } }
     public Vector3 DisplayOffset { get {
             Vector3 rot = this.transform.rotation.eulerAngles;
@@ -28,14 +32,21 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip, IUsable
             rot.z = 0;
             return Quaternion.Euler(rot) * displayOffset;
         } }
+    //
 
+    // IFood
+    public FoodType FoodType { get { return foodType; } }
+
+    // ICookable
     Color originalColor;
     float percentCooked = 0f;
     float percentMiscooked = 0f;
 
     public float PercentCooked { get { return percentCooked;} }
     public float PercentMiscooked { get { return percentMiscooked; } }
+    //
 
+    // IUsable
     public Vector3 UseOffset { get { return useOffset; } }
     public Quaternion UseRotation { get { return useRotation; } }
     public bool IgnorePositionSmoothing { get { return ignorePositionSmoothing; } }
@@ -43,6 +54,7 @@ public class FoodObject : ItemObject, ICookable, IHaveTooltip, IUsable
 
     public UnityAction OnEnableEvent { get; set; }
     public UnityAction OnDisableEvent { get; set; }
+    //
 
     private void Awake()
     {

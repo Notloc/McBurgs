@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &2299874166152327808
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975338256554551315}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2, y: 0.02, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3904405816125271775
 GameObject:
   m_ObjectHideFlags: 0
@@ -77,19 +90,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2299874166152327808
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975338256554551315}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.2, y: 0.02, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1398353639369511961
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,61 +188,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TomatoSlice
       objectReference: {fileID: 0}
-    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: node1
-      value: 
-      objectReference: {fileID: 3012704655462612221}
-    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: node2
-      value: 
-      objectReference: {fileID: 7485207365487719470}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: renderer
-      value: 
-      objectReference: {fileID: 5710541042151200097}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: tooltipData.title.text
-      value: Tomato Slice
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookingRate
-      value: 0.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.r
-      value: 0.6509434
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: cookedColor.b
-      value: 0.030006098
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: burntColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: burntColor.r
-      value: 0.20784314
-      objectReference: {fileID: 0}
-    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
-        type: 3}
-      propertyPath: burntColor.b
-      value: 0.04118296
-      objectReference: {fileID: 0}
     - target: {fileID: 237394617527604224, guid: 804ea5b65c24d564e9c084178dd66861,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -312,6 +257,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: node1
+      value: 
+      objectReference: {fileID: 3012704655462612221}
+    - target: {fileID: 7192598437795876246, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: node2
+      value: 
+      objectReference: {fileID: 7485207365487719470}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: renderer
+      value: 
+      objectReference: {fileID: 5710541042151200097}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: tooltipData.title.text
+      value: Tomato Slice
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookingRate
+      value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.r
+      value: 0.6509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: cookedColor.b
+      value: 0.030006098
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: burntColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: burntColor.r
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: burntColor.b
+      value: 0.04118296
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: foodType
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}

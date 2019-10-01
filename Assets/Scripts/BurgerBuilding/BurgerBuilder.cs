@@ -8,6 +8,8 @@ public class BurgerBuilder : MonoBehaviour
 
     [Header("Required Reference")]
     [SerializeField] BurgerNode startNode;
+    [SerializeField] BurgerScorer scorer;
+    [SerializeField] BurgerTooltipManager tooltip;
 
     [Header("Options")]
     [SerializeField] [Range(0f, 0.1f)] float attachOffsetLimit = 0.03f;
@@ -130,7 +132,8 @@ public class BurgerBuilder : MonoBehaviour
 
     private void FinishBurger()
     {
-
+        scorer.ScoreBurger(burgerComponents);
+        tooltip.OnBurgerFinish();
     }
 
 

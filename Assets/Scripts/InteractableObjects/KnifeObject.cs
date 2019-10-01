@@ -49,7 +49,7 @@ public class KnifeObject : ItemObject, IUsable
         float start = Time.time;
         yield return null;
 
-        while (start + timer < Time.time)
+        while (start + timer > Time.time)
         {
             yield return null;
         }

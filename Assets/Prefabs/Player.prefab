@@ -326,11 +326,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3950898606505856362}
     m_Modifications:
-    - target: {fileID: 2239393392215517392, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
-        type: 3}
-      propertyPath: m_Name
-      value: Tooltip
-      objectReference: {fileID: 0}
     - target: {fileID: 6437964160517432819, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -386,11 +381,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2239393392215517392, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
+        type: 3}
+      propertyPath: m_Name
+      value: Tooltip
+      objectReference: {fileID: 0}
     - target: {fileID: 4252627322999698293, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}
       propertyPath: interactionManager
       value: 
       objectReference: {fileID: 6559895938970231549}
+    - target: {fileID: 4252627322999698293, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
+        type: 3}
+      propertyPath: targetCamera
+      value: 
+      objectReference: {fileID: 6327642950582297385}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d064eefc4a6d9649a98e8c4b47a804d, type: 3}
 --- !u!4 &4514225168797692938 stripped
