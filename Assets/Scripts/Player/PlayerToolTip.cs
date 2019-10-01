@@ -8,8 +8,10 @@ public class PlayerTooltip : MonoBehaviour
     [SerializeField] TooltipTextEntryGui textEntryGuiPrefab;
     [SerializeField] TooltipValueEntryGui valueEntryGuiPrefab;
     [SerializeField] TooltipProgressEntryGui progressEntryGuiPrefab;
+    [SerializeField] TooltipBurgerEntryGui burgerEntryGuiPrefab;
 
     [Header("Required References")]
+    [SerializeField] Camera targetCamera;
     [SerializeField] InteractionManager interactionManager;
     [SerializeField] Canvas tooltipCanvas;
     [SerializeField] RectTransform entryParent;
@@ -25,7 +27,13 @@ public class PlayerTooltip : MonoBehaviour
         IHaveTooltip newTarget = null;
         Collider targetCollider = interactionManager.TargetCollider;
         if (targetCollider)
-            newTarget = targetCollider.GetComponentInParent<IHaveTooltip>();
+        {
+            var manager = targetCollider.GetComponentInParent<TooltipManager>();
+            if (manager)
+                newTarget = manager.ActiveTooltip;
+            else
+                newTarget = targetCollider.GetComponentInParent<IHaveTooltip>();
+        }
 
         if (tooltipInput && InterfaceUtil.IsNull(newTarget) == false)
         {
@@ -54,6 +62,7 @@ public class PlayerTooltip : MonoBehaviour
 
         // Position the tooltip
         tooltipCanvas.transform.position = currentTarget.transform.position + currentTarget.DisplayOffset;
+        tooltipCanvas.transform.rotation = targetCamera.transform.rotation;
         UpdateEntries();
     }
 
@@ -81,11 +90,17 @@ public class PlayerTooltip : MonoBehaviour
             newEntry = Instantiate(textEntryGuiPrefab, entryParent);
         else if (entry.entryType == TooltipEntry.TooltipEntryType.Value)
             newEntry = Instantiate(valueEntryGuiPrefab, entryParent);
-        else
+        else if (entry.entryType == TooltipEntry.TooltipEntryType.BurgerScore)
+            newEntry = Instantiate(burgerEntryGuiPrefab, entryParent);
+        else if (entry.entryType == TooltipEntry.TooltipEntryType.ProgressBar)
             newEntry = Instantiate(progressEntryGuiPrefab, entryParent);
+        else
+        {
+            Debug.LogError("Error: There is no prefab for this type of Tooltip entry.");
+            return null;
+        }
 
         newEntry.AssignEntry(entry);
-
         return newEntry;
     }
 
