@@ -62,9 +62,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 6142146849226385182}
-  grabOffet: {x: 0.2, y: 0.25, z: 0.15}
+  grabOffet: {x: 0.1, y: 0, z: 0}
   grabRotation: {x: 0, y: 0, z: 0, w: 1}
-  useOffset: {x: 0.18, y: 0.2, z: 0.25}
+  useOffset: {x: 0.05, y: -0.03, z: 0.03}
   useRotation: {x: 0, y: 0, z: 0, w: 1}
   ignorePositionSmoothing: 0
   resetRotationAfterUse: 0
@@ -102,5 +102,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d046da7f323b3554e82af38e71050799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  node1: {fileID: 0}
-  node2: {fileID: 0}
+  topNode: {fileID: 0}
+  bottomNode: {fileID: 0}
+  componentSpacingMult: 0.15

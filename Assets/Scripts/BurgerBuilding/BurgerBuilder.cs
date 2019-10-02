@@ -75,11 +75,11 @@ public class BurgerBuilder : MonoBehaviour
 
         int i = 0;
 
-        // Cache all the original offset values
-        float[] originalOffsets = new float[burgerComponents.Count];
+        // Cache all the original position values
+        Vector3[] originalOffsets = new Vector3[burgerComponents.Count];
         foreach (IBurgerComponent component in burgerComponents)
         {
-            originalOffsets[i] = component.transform.localPosition.y;
+            originalOffsets[i] = component.transform.localPosition;
             i++;
         }
 
@@ -89,16 +89,17 @@ public class BurgerBuilder : MonoBehaviour
         while (startTime + animationLength > Time.time)
         {
             float progress = (Time.time - startTime) / animationLength;
+            Vector3 up = this.transform.up;
 
             i = 0;
             foreach (IBurgerComponent component in burgerComponents)
             {
-                SetLocalYOffset(component.transform, progress, originalOffsets[i]);
+                SetLocalYOffset(component.transform, progress, originalOffsets[i], up);
                 i++;
             }
 
             // Half way through the animation, Check if the newest piece should fall off
-            if (progress > 0.5f && !validatedNewComponent)
+            if (!validatedNewComponent && progress > 0.5f)
             {
                 result = ValidateNewComponent();
                 if (!result)
@@ -114,7 +115,7 @@ public class BurgerBuilder : MonoBehaviour
         i = 0;
         foreach (IBurgerComponent component in burgerComponents)
         {
-            SetLocalYOffset(component.transform, 1f, originalOffsets[i]);
+            SetLocalYOffset(component.transform, 1f, originalOffsets[i], Vector3.zero);
             i++;
         }
 
@@ -126,11 +127,10 @@ public class BurgerBuilder : MonoBehaviour
         else
             FinishBurger();
     }
-    private void SetLocalYOffset(Transform t, float progress, float originalOffset)
+    private void SetLocalYOffset(Transform component, float progress, Vector3 originalPos, Vector3 relativeUp)
     {
-        Vector3 pos = t.localPosition;
-        pos.y = originalOffset - (animationStrength * Mathf.Sin(progress * Mathf.PI));
-        t.localPosition = pos;
+        component.localPosition = originalPos;
+        component.position -= relativeUp * (animationStrength * Mathf.Sin(progress * Mathf.PI));
     }
 
     private void FinishBurger()

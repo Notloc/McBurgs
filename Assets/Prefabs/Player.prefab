@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2361220115144893885}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.4, z: 0.5}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4793061517253047683}
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 9049749402380805210}
+  rigid: {fileID: 7182571765341177862}
   targetCamera: {fileID: 6327642950582297385}
   heldItemParent: {fileID: 8690415314957154052}
   interactionDistance: 2.5
@@ -326,6 +327,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3950898606505856362}
     m_Modifications:
+    - target: {fileID: 2239393392215517392, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
+        type: 3}
+      propertyPath: m_Name
+      value: Tooltip
+      objectReference: {fileID: 0}
     - target: {fileID: 6437964160517432819, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -380,11 +386,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2239393392215517392, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
-        type: 3}
-      propertyPath: m_Name
-      value: Tooltip
       objectReference: {fileID: 0}
     - target: {fileID: 4252627322999698293, guid: 5d064eefc4a6d9649a98e8c4b47a804d,
         type: 3}

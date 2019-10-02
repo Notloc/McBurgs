@@ -9,6 +9,9 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
     [SerializeField] BurgerNode topNode;
     [SerializeField] BurgerNode bottomNode;
 
+    [Header("Options")]
+    [SerializeField] float componentSpacingMult = 0.5f;
+
     IUsable usable;
 
     public IFood Food => throw new System.NotImplementedException();
@@ -52,7 +55,7 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
         // Reset local position
         this.transform.localPosition = Vector3.zero;
         // Move position based on node positions
-        this.transform.position -= (selfNode.transform.position - targetNode.transform.position);
+        this.transform.position -= (selfNode.transform.position - targetNode.transform.position) * componentSpacingMult;
         // Reapply offset so the burger can be messy
         this.transform.localPosition += localOffset;
         //
