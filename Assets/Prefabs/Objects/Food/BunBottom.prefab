@@ -108,7 +108,7 @@ MonoBehaviour:
   attachOffsetLimit: 0.03
   centerOfMassRadiusLimit: 0.1
   detachmentForce: 50
-  animationStrength: 0.008
+  animationStrength: 0.002
   animationLength: 0.25
 --- !u!114 &4378177377994275273
 MonoBehaviour:
