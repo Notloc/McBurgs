@@ -14,6 +14,7 @@ public class InteractionManager : PlayerComponent
 
     [Header("Interaction Options")]
     [SerializeField] float interactionDistance = 1.5f;
+    [SerializeField] float maxHoldOffset = 0.55f;
     [SerializeField] float rotationSensitivity = 3f;
     [SerializeField] float itemPositionSmoothing = 2f;
     [SerializeField] float itemRotationSmoothing = 15f;
@@ -28,6 +29,8 @@ public class InteractionManager : PlayerComponent
     private bool isHoldingItem { get { return HeldItem != null; } }
     IGrabbable storedItem = null;
     bool isUsingItem = false;
+
+    private Vector3 holdOffset = Vector3.zero;
 
     private void UpdateTargets()
     {
@@ -87,6 +90,11 @@ public class InteractionManager : PlayerComponent
         use = Input.GetButton(ControlBindings.USE_ITEM);
         swap = Input.GetButtonDown(ControlBindings.SWAP_ITEM);
         rotate = Input.GetButton(ControlBindings.ROTATE_ITEM);
+
+
+        float scrollDelta = Input.GetAxis(ControlBindings.HOLD_DISTANCE);
+        holdOffset.z = Mathf.Clamp(holdOffset.z + scrollDelta, 0f, maxHoldOffset);
+
 
         if (rotate && InterfaceUtil.IsNull(HeldItem) == false)
             controller.LookEnabled = false;
@@ -182,6 +190,8 @@ public class InteractionManager : PlayerComponent
         if (HeldItem != null || target == null || target.Locked)
             return;
 
+        holdOffset.z = 0f;
+
         target.Lock();
 
         target.transform.SetParent(heldItemParent);
@@ -273,7 +283,7 @@ public class InteractionManager : PlayerComponent
 
                 // Skip the position smoothing if desired
                 if (usable.IgnorePositionSmoothing)
-                    HeldItem.transform.localPosition = usable.UseOffset;
+                    HeldItem.transform.localPosition = usable.UseOffset + holdOffset;
 
                 if (usable.UseRotation.Equals(Quaternion.identity) == false)
                 {
@@ -286,6 +296,8 @@ public class InteractionManager : PlayerComponent
                 heldItemTargetPosition = HeldItem.GrabOffset;
                 heldItemTargetRotation = HeldItem.transform.localRotation;
             }
+
+            heldItemTargetPosition += holdOffset;
 
             HeldItem.transform.localPosition = Vector3.Lerp(HeldItem.transform.localPosition, heldItemTargetPosition, Time.deltaTime * itemPositionSmoothing);
             HeldItem.transform.localRotation = Quaternion.Slerp(HeldItem.transform.localRotation, heldItemTargetRotation, Time.deltaTime * itemRotationSmoothing);

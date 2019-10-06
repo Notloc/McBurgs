@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 6268133023963441758}
-  grabOffet: {x: 0.45, y: -0.3, z: -0.1}
+  grabOffet: {x: 0.45, y: -0.3, z: 0.15}
   grabRotation: {x: 0.0001, y: 0, z: 0, w: 1}
   regularCollisionBox: {fileID: 356118166308189369}
   bladeCollisionBox: {fileID: 3643226068977457252}

@@ -107,7 +107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2361220115144893885}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0.8}
+  m_LocalPosition: {x: 0, y: -0.1, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4793061517253047683}
@@ -215,10 +215,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 9049749402380805210}
-  rigid: {fileID: 7182571765341177862}
   targetCamera: {fileID: 6327642950582297385}
   heldItemParent: {fileID: 8690415314957154052}
   interactionDistance: 2.5
+  maxHoldOffset: 0.55
   rotationSensitivity: 4
   itemPositionSmoothing: 8
   itemRotationSmoothing: 30
