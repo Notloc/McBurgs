@@ -15,6 +15,10 @@ public class InteractionManager : PlayerComponent
     [Header("Interaction Options")]
     [SerializeField] float interactionDistance = 1.5f;
     [SerializeField] float maxHoldOffset = 0.55f;
+    [SerializeField] float throwHoldTime = 0.7f;
+    [SerializeField] float throwForce = 10f;
+
+    [Header("Rotation Options")]
     [SerializeField] float rotationSensitivity = 3f;
     [SerializeField] float itemPositionSmoothing = 2f;
     [SerializeField] float itemRotationSmoothing = 15f;
@@ -72,21 +76,29 @@ public class InteractionManager : PlayerComponent
 
         TakeInput();
 
-        if (!target.IsNull() && target as IGrabbable != null)
+        if (!target.IsNull() && target as IGrabbable == null)
         {
             HandleInteractable(target);
         }
         else
         {
-            HandleGrabbable(target as IGrabbable);
+            HandleHeldItems(target as IGrabbable);
         }
-        
     }
 
-    bool interact, use, swap, rotate;
+    bool interactReady, interact, interactUp, use, swap, rotate;
+    float interactPressTime;
     private void TakeInput()
     {
         interact = Input.GetButtonDown(ControlBindings.INTERACT);
+        interactUp = Input.GetButtonUp(ControlBindings.INTERACT);
+
+        if (interact)
+        {
+            interactReady = true;
+            interactPressTime = Time.time;
+        }
+
         use = Input.GetButton(ControlBindings.USE_ITEM);
         swap = Input.GetButtonDown(ControlBindings.SWAP_ITEM);
         rotate = Input.GetButton(ControlBindings.ROTATE_ITEM);
@@ -110,7 +122,7 @@ public class InteractionManager : PlayerComponent
             target.Interact();
     }
 
-    private void HandleGrabbable(IGrabbable target)
+    private void HandleHeldItems(IGrabbable target)
     {
         // Swap item in hand with inv
         if (swap)
@@ -120,14 +132,28 @@ public class InteractionManager : PlayerComponent
         }
 
         // Pickup/Drop item
-        if (interact)
+        if (interact && interactReady)
         {
             if (!isHoldingItem)
+            {
+                interactReady = false;
                 PickUpItem(target);
-            else
-                DropItem(HeldItem);
-
+            }
             return;
+        }
+
+        if (interactUp && interactReady)
+        {
+            if (isHoldingItem)
+            {
+                // If button was held long enough
+                if (Time.time - interactPressTime >= throwHoldTime)
+                    ThrowItem(HeldItem);
+                else
+                    DropItem(HeldItem);
+
+                interactReady = false;
+            }
         }
 
         if (HeldItem as IUsable != null)
@@ -204,7 +230,7 @@ public class InteractionManager : PlayerComponent
     }
     private void DropItem(IGrabbable item)
     {
-        if (item == null)
+        if (item.IsNull())
             return;
 
         item.Unlock();
@@ -222,6 +248,16 @@ public class InteractionManager : PlayerComponent
         DropItem(grabbable);
     }
     //
+
+    private void ThrowItem(IGrabbable item)
+    {
+        if (item.IsNull())
+            return;
+
+        DropItem(item);
+        item.Rigidbody.AddForce(targetCamera.transform.forward * throwForce, ForceMode.Impulse);
+    }
+
 
     // INV FUNCTIONS
     //
