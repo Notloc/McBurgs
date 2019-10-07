@@ -48,8 +48,6 @@ public class PlayerTooltip : MonoBehaviour
             }
         }
 
-
-
         // Enable/Disable tooltip 
         if (currentTarget.IsNull() || currentTarget == interactionManager.HeldItem as IHaveTooltip)
         {
