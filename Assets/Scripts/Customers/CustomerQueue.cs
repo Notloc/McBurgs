@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrderQueue : MonoBehaviour
+public class CustomerQueue : MonoBehaviour
 {
     [Header("Required References")]
     [SerializeField] Transform entrance;
@@ -11,28 +11,41 @@ public class OrderQueue : MonoBehaviour
     [Header("Options")]
     [SerializeField] int maxAllowedInQueue;
 
+    public bool IsFull { get { return maxAllowedInQueue <= queuedCustomers.Count; } }
+
     public Transform Entrance { get { return entrance; } }
     public Transform Exit { get { return exit; } }
 
     private Queue<Customer> queuedCustomers = new Queue<Customer>();
 
+    public bool Contains(Customer cust)
+    {
+        return queuedCustomers.Contains(cust);
+    }
+
     public bool EnterQueue(Customer newCustomer)
     {
-        if (queuedCustomers.Count >= maxAllowedInQueue)
+        if (!newCustomer || queuedCustomers.Count >= maxAllowedInQueue)
             return false;
 
         queuedCustomers.Enqueue(newCustomer);
         return true;
     }
 
+    public Customer DequeueCustomer()
+    {
+        return queuedCustomers.Dequeue();
+    }
+
     private void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.K))
             queuedCustomers.Dequeue();
-        UpdateQueuePositions();
+
+        UpdateStandingPositions();
     }
 
-    private void UpdateQueuePositions()
+    private void UpdateStandingPositions()
     {
         float i = 0f;
         float count = maxAllowedInQueue;

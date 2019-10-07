@@ -236,9 +236,10 @@ public class InteractionManager : PlayerComponent
     private IGrabbable UnstoreItem()
     {
         IGrabbable item = storedItem;
-        if (item == null)
+        if (item.IsNull())
             return null;
 
+        storedItem = null;
         item.gameObject.SetActive(true);
         return item;
     }
