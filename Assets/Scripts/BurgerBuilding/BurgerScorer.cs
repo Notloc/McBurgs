@@ -71,7 +71,7 @@ namespace BurgerScoring
 
         public void AddFood(IFood food)
         {
-            if (InterfaceUtil.IsNull(food))
+            if (food.IsNull())
                 food = new InvalidFood();
 
             switch (food.FoodType)

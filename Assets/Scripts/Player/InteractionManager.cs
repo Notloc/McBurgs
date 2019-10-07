@@ -72,7 +72,7 @@ public class InteractionManager : PlayerComponent
 
         TakeInput();
 
-        if (target != null && InterfaceUtil.IsNull(target as IGrabbable))
+        if (!target.IsNull() && target as IGrabbable != null)
         {
             HandleInteractable(target);
         }
@@ -96,7 +96,7 @@ public class InteractionManager : PlayerComponent
         holdOffset.z = Mathf.Clamp(holdOffset.z + scrollDelta, 0f, maxHoldOffset);
 
 
-        if (rotate && InterfaceUtil.IsNull(HeldItem) == false)
+        if (rotate && HeldItem.IsNull() == false)
             controller.LookEnabled = false;
         else
             controller.LookEnabled = true;
@@ -149,7 +149,7 @@ public class InteractionManager : PlayerComponent
 
     private void RotateItem()
     {
-        if (InterfaceUtil.IsNull(HeldItem))
+        if (HeldItem.IsNull())
             return;
 
         float xInput = -Input.GetAxis(ControlBindings.VIEW_INPUT_X) * rotationSensitivity;
@@ -275,10 +275,10 @@ public class InteractionManager : PlayerComponent
     Quaternion heldItemTargetRotation = Quaternion.identity;
     private void PositionHeldItem()
     {
-        if (InterfaceUtil.IsNull(HeldItem) == false)
+        if (HeldItem.IsNull() == false)
         {
             IUsable usable = HeldItem as IUsable;
-            if (isUsingItem && !InterfaceUtil.IsNull(usable))
+            if (isUsingItem && !usable.IsNull())
             {
                 heldItemTargetPosition = usable.UseOffset;
 

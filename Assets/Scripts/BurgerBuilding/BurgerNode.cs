@@ -27,7 +27,7 @@ public class BurgerNode : MonoBehaviour
         float yPos = 0f;
 
         IBurgerComponent component = GetComponentInParent<IBurgerComponent>();
-        if (InterfaceUtil.IsNull(component) == false)
+        if (!component.IsNull())
             yPos = component.transform.position.y;
 
         if (this.transform.position.y > yPos)
