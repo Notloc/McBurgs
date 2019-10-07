@@ -14,7 +14,12 @@ public enum CustomerState
 
 public class Customer : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    [Header("Required Refereneces")]
+    [SerializeField] GameObject moneyPrefab;
+    [SerializeField] NavMeshAgent agent;
+
+    public NavMeshAgent Agent { get { return agent; } }
+
 
     private CustomerState state;
     private int subState;
@@ -78,14 +83,14 @@ public class Customer : MonoBehaviour
             waiting = til.WaitingArea;
 
             // Set a path to it
-            agent.SetDestination(queue.Entrance.position);
+            Agent.SetDestination(queue.Entrance.position);
             subState = 1;
         }
 
         if (subState == 1)
         {
             // Advance state once close enough
-            if ((agent.destination - agent.transform.position).sqrMagnitude < 1.5f)
+            if ((Agent.destination - Agent.transform.position).sqrMagnitude < 1.5f)
                 subState = 2;
         }
 
@@ -111,11 +116,29 @@ public class Customer : MonoBehaviour
             SetState(CustomerState.Eating);
     }
 
+    // Substates:
+    //  0 - Just got food
+    //  1 - Paid and leaving
     private void HandleEating()
     {
-        if (waiting.Contains(this))
-            waiting.Remove(this);
-        agent.SetDestination(CustomerManager.Instance.Exit);
+        if (subState == 0)
+        {
+            if (waiting.Contains(this))
+                waiting.Remove(this);
+            Agent.SetDestination(CustomerManager.Instance.Exit);
+
+            PayForFood();
+
+            subState = 1;
+        }
+
+    }
+
+    private void PayForFood()
+    {
+        int cash = Random.Range(1, 12);
+        for (int i=0; i<cash; i++)
+            Instantiate(moneyPrefab, this.transform.position + (Vector3.up * 2), Quaternion.identity);
     }
 
     public void ShowOrder(float length)

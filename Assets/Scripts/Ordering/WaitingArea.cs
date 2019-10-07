@@ -51,7 +51,7 @@ public class WaitingArea : MonoBehaviour
         {
             Vector3 dest = Vector3.Lerp(exit.position, entrance.position, i / count);
 
-            customer.agent.SetDestination(dest);
+            customer.Agent.SetDestination(dest);
             i++;
         }
     }

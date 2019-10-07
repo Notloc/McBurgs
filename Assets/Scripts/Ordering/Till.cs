@@ -29,7 +29,7 @@ public class Till : MonoBehaviour, IInteractable
         customer = orderQueue.DequeueCustomer();
         customer.ShowOrder(orderDisplayTime);
 
-        customer.agent.SetDestination(orderingPosition.position);
+        customer.Agent.SetDestination(orderingPosition.position);
 
         ShowOrderTakingControls();
     }

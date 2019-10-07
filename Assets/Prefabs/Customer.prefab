@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 638da378753d5bf41bd38596bbe87a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyPrefab: {fileID: 4695999885597130745, guid: 71ada86a17316994fb9ae4f153c86d96,
+    type: 3}
   agent: {fileID: 5058502410810176978}
 --- !u!195 &5058502410810176978
 NavMeshAgent:
