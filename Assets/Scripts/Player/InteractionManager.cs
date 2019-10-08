@@ -17,6 +17,7 @@ public class InteractionManager : PlayerComponent
     [SerializeField] float maxHoldOffset = 0.55f;
     [SerializeField] float throwHoldTime = 0.7f;
     [SerializeField] float throwForce = 10f;
+    [SerializeField] float pickupCalculationOffset = 0.1f;
 
     [Header("Rotation Options")]
     [SerializeField] float rotationSensitivity = 3f;
@@ -216,18 +217,49 @@ public class InteractionManager : PlayerComponent
         if (HeldItem != null || target == null || target.Locked)
             return;
 
-        holdOffset.z = 0f;
+        if (target.SnapToHands == false)
+            holdOffset = CalculateGrabOffset(new Ray(heldItemParent.position, heldItemParent.forward),
+                            (heldItemParent.position + (heldItemParent.rotation * target.GrabOffset)),
+                             target.transform.position);
+        else
+            holdOffset = Vector3.zero;
 
         target.Lock();
 
         target.transform.SetParent(heldItemParent);
-        target.transform.localPosition = target.GrabOffset;
 
         if (target.GrabRotation.Equals(Quaternion.identity) == false)
             target.transform.localRotation = Quaternion.Euler(0f, target.transform.localRotation.eulerAngles.y, 0f);
 
         HeldItem = target;
     }
+    private Vector3 CalculateGrabOffset(Ray line, Vector3 origin, Vector3 location)
+    {
+        int iterations = 30;
+
+        float closestLength = 99f;
+        int closestIndex = 0;
+
+        float step = maxHoldOffset / (float)iterations;
+
+        Vector3 calcOffset = pickupCalculationOffset * line.direction.normalized;
+        for (int i=0; i<iterations; i++)
+        {
+            Vector3 offset = (line.direction.normalized * step * i) + calcOffset;
+
+            Vector3 pos = origin + offset;
+
+            float dist = (pos - location).sqrMagnitude;
+            if (dist < closestLength)
+            {
+                closestIndex = i;
+                closestLength = dist;
+            }
+        }
+
+        return new Vector3(0f, 0f, step * closestIndex);
+    }
+
     private void DropItem(IGrabbable item)
     {
         if (item.IsNull())
@@ -277,6 +309,7 @@ public class InteractionManager : PlayerComponent
 
         storedItem = null;
         item.gameObject.SetActive(true);
+        item.transform.localPosition = Vector3.down;
         return item;
     }
 

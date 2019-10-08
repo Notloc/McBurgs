@@ -338,6 +338,16 @@ PrefabInstance:
       propertyPath: burntColor.b
       value: 0.056692783
       objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: useOffset.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 780884408833488373, guid: 804ea5b65c24d564e9c084178dd66861,
+        type: 3}
+      propertyPath: ignorePositionSmoothing
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 804ea5b65c24d564e9c084178dd66861, type: 3}
 --- !u!1 &975338256554551315 stripped

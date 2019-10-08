@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class KnifeObject : ItemObject, IUsable
 {
     [Header("Required References")]
+    [SerializeField] AudioSource soundEffect;
     [SerializeField] Collider regularCollisionBox;
     [SerializeField] Collider bladeCollisionBox;
 
@@ -71,6 +72,8 @@ public class KnifeObject : ItemObject, IUsable
     {
         if (!knifeEnabled)
             return;
+
+        soundEffect.Play();
 
         if (LayerManager.InteractionLayer != collision.collider.gameObject.layer)
             return;
