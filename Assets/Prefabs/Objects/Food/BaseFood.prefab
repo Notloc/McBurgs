@@ -104,4 +104,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   topNode: {fileID: 0}
   bottomNode: {fileID: 0}
-  componentSpacingMult: 0.15
+  componentSpacingMult: 0.18

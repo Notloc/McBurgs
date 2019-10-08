@@ -76,7 +76,7 @@ public class KnifeObject : ItemObject, IUsable
             return;
 
         ICuttable cuttable = collision.collider.GetComponentInParent<ICuttable>();
-        if (InterfaceUtil.IsNull(cuttable) == false)
+        if (cuttable.IsNull() == false)
         {
             cuttable.Cut(collision);
         }

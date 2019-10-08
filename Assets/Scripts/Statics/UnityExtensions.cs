@@ -27,4 +27,11 @@ public static class UnityExtensions
     {
         return ((self) & (1<<layer)) != 0;
     }
+
+    public static bool IsNull(this IGameObject self)
+    {
+        if (self == null)
+            return true;
+        return !(self as MonoBehaviour);
+    }
 }

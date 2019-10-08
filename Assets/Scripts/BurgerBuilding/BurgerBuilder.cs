@@ -56,7 +56,7 @@ public class BurgerBuilder : MonoBehaviour
     private void Attach(BurgerNode node)
     {
         var component = node.GetComponentInParent<IBurgerComponent>();
-        if (InterfaceUtil.IsNull(component))
+        if (component.IsNull())
             return;
 
         previousNode = activeNode;
@@ -172,7 +172,7 @@ public class BurgerBuilder : MonoBehaviour
         r.AddForce((newest.transform.position - this.transform.position).normalized * detachmentForce);
 
         IGrabbable grabbable = newest.gameObject.GetComponent<IGrabbable>();
-        if (InterfaceUtil.IsNull(grabbable) == false)
+        if (grabbable.IsNull() == false)
             grabbable.ChangeRigidbody(r);
 
         burgerComponents.Remove(newest);

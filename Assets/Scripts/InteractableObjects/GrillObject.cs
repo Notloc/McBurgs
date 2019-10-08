@@ -30,7 +30,7 @@ public class GrillObject : MonoBehaviour, IInteractable, IHaveTooltip
         foreach (ICookable item in grillingItems)
         {
             // Check for deleted and disabled objects
-            if (InterfaceUtil.IsNull(item) || item.gameObject.activeInHierarchy == false)
+            if (item.IsNull() || item.gameObject.activeInHierarchy == false)
                 removalList.Add(item);
             else
                 item.Cook(CookingType.Grill, Time.fixedDeltaTime);

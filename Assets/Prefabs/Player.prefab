@@ -219,6 +219,8 @@ MonoBehaviour:
   heldItemParent: {fileID: 8690415314957154052}
   interactionDistance: 2.5
   maxHoldOffset: 0.55
+  throwHoldTime: 0.6
+  throwForce: 20
   rotationSensitivity: 4
   itemPositionSmoothing: 8
   itemRotationSmoothing: 30

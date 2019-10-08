@@ -35,7 +35,7 @@ public class PlayerTooltip : MonoBehaviour
                 newTarget = targetCollider.GetComponentInParent<IHaveTooltip>();
         }
 
-        if (tooltipInput && InterfaceUtil.IsNull(newTarget) == false)
+        if (tooltipInput && newTarget.IsNull() == false)
         {
             if (currentTarget != newTarget)
             {
@@ -48,10 +48,8 @@ public class PlayerTooltip : MonoBehaviour
             }
         }
 
-
-
         // Enable/Disable tooltip 
-        if ( InterfaceUtil.IsNull(currentTarget) || currentTarget == interactionManager.HeldItem as IHaveTooltip)
+        if (currentTarget.IsNull() || currentTarget == interactionManager.HeldItem as IHaveTooltip)
         {
             currentTarget = null;
             tooltipCanvas.gameObject.SetActive(false);
