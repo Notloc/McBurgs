@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.AI;
 
 public enum CustomerState
@@ -12,7 +13,7 @@ public enum CustomerState
     Leaving
 }
 
-public class Customer : MonoBehaviour
+public class Customer : NetworkBehaviour
 {
     [Header("Required Refereneces")]
     [SerializeField] GameObject moneyPrefab;
@@ -21,13 +22,14 @@ public class Customer : MonoBehaviour
     public NavMeshAgent Agent { get { return agent; } }
 
 
-    private CustomerState state;
+    [SyncVar] private CustomerState state;
     private int subState;
 
     private FoodObject burger;
 
-    private void Awake()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
         SetState(CustomerState.Entering);
     }
 
@@ -39,7 +41,8 @@ public class Customer : MonoBehaviour
 
     private void FixedUpdate()
     {
-        ProcessAi();
+        if (isServer)
+            ProcessAi();
     }
 
 

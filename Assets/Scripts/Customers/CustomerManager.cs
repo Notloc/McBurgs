@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CustomerManager : MonoBehaviour
+public class CustomerManager : NetworkBehaviour
 {
     public static CustomerManager Instance;
 
@@ -28,9 +29,11 @@ public class CustomerManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        TrySpawnCustomer();
+        if (isServer)
+            TrySpawnCustomer();
     }
 
+    [Server]
     private void TrySpawnCustomer()
     {
         if (customers.Count >= maxCustomers || spawnTimer > Time.time)
@@ -38,8 +41,12 @@ public class CustomerManager : MonoBehaviour
 
         spawnTimer = Time.time + Random.Range(spawnDelayRange.x, spawnDelayRange.y);
 
+        
+
         var customer = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity);
         customers.Add(customer);
+
+        NetworkServer.Spawn(customer.gameObject);
     }
 
 

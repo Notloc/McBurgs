@@ -72,6 +72,9 @@ public class InteractionManager : PlayerComponent
 
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
+
         UpdateTargets();
         IInteractable target = TargetInteractable;
 
@@ -335,6 +338,8 @@ public class InteractionManager : PlayerComponent
 
     private void LateUpdate()
     {
+        if (!isLocalPlayer)
+            return;
         PositionHeldItem();
     }
 

@@ -1,16 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Player : MonoBehaviour, IPausable
+public class Player : NetworkBehaviour, IPausable
 {
+    [Header("Required Reference")]
+    [SerializeField] GuiController guiPrefab;
+    [SerializeField] new Camera camera;
+
+    public GuiController Gui { get; private set; }
     public bool IsPaused { get; private set; }
     private IPausable[] pausableComponents;
 
-    private void Awake()
+    public override void OnStartClient()
     {
-        pausableComponents = this.GetComponentsInChildren<IPausable>();
+        base.OnStartClient();
+        camera.enabled = false;
     }
+
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        
+        camera.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        Gui = Instantiate(guiPrefab);
+        pausableComponents = this.GetComponentsInChildren<IPausable>();
+
+    } 
 
     public void Pause()
     {

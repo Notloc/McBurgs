@@ -8,29 +8,18 @@ public class GameController : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] Player playerPrefab;
-    [SerializeField] GuiController guiPrefab;
-
+    
     [Header("Options")]
     [SerializeField] Vector3 spawnPosition;
     [SerializeField] float startingCash = 100f;
 
     public Player Player { get; private set; }
-    public GuiController Gui { get; private set; }
-
-
+   
     private void Awake()
     {
         Instance = this;
-
         Money = startingCash;
-
-        Cursor.lockState = CursorLockMode.Locked;
-
-        Player = Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-        Gui = Instantiate(guiPrefab);
     }
-
-
 
 
     public float Money { get; private set; }

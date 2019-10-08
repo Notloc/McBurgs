@@ -27,11 +27,16 @@ public class PlayerController : PlayerComponent
 
     private void Update()
     {
+        if (!isLocalPlayer)
+            return;
+
         Rotate();
     }
 
     private void FixedUpdate()
-    { 
+    {
+        if (!isLocalPlayer)
+            return;
         Move(Time.fixedDeltaTime);
     }
 

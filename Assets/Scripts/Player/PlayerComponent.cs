@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PlayerComponent : MonoBehaviour, IPausable
+public class PlayerComponent : NetworkBehaviour, IPausable
 {
     public bool IsPaused { get; private set; }
 
