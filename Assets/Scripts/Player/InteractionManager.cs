@@ -217,10 +217,12 @@ public class InteractionManager : PlayerComponent
         if (HeldItem != null || target == null || target.Locked)
             return;
 
-
-        holdOffset = CalculateGrabOffset(new Ray(heldItemParent.position, heldItemParent.forward),
+        if (target.SnapToHands == false)
+            holdOffset = CalculateGrabOffset(new Ray(heldItemParent.position, heldItemParent.forward),
                             (heldItemParent.position + (heldItemParent.rotation * target.GrabOffset)),
                              target.transform.position);
+        else
+            holdOffset = Vector3.zero;
 
         target.Lock();
 
@@ -307,6 +309,7 @@ public class InteractionManager : PlayerComponent
 
         storedItem = null;
         item.gameObject.SetActive(true);
+        item.transform.localPosition = Vector3.down;
         return item;
     }
 
