@@ -62,9 +62,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 6142146849226385182}
-  grabOffet: {x: 0.1, y: 0, z: 0}
+  grabOffet: {x: 0.04, y: 0.07, z: 0}
   grabRotation: {x: 0, y: 0, z: 0, w: 1}
-  useOffset: {x: 0.05, y: -0.03, z: 0.03}
+  useOffset: {x: 0.03, y: 0.04, z: 0.03}
   useRotation: {x: 0, y: 0, z: 0, w: 1}
   ignorePositionSmoothing: 0
   resetRotationAfterUse: 0
