@@ -25,9 +25,13 @@ public class PlayerController : PlayerComponent
 
     private float cameraRotation = 0f;
 
-    private void FixedUpdate()
+    private void Update()
     {
         Rotate();
+    }
+
+    private void FixedUpdate()
+    { 
         Move(Time.fixedDeltaTime);
     }
 
@@ -40,7 +44,7 @@ public class PlayerController : PlayerComponent
         float yRotation = Input.GetAxis(ControlBindings.VIEW_INPUT_X);
         Quaternion deltaRotation = Quaternion.Euler(0f, yRotation, 0f);
 
-        playerRBody.rotation = deltaRotation * playerRBody.rotation;
+        this.transform.rotation = deltaRotation * this.transform.rotation;
 
 
         // Camera rotation

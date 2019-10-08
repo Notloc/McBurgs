@@ -9,12 +9,12 @@ public class InteractionManager : PlayerComponent
 {
     [Header("Required References")]
     [SerializeField] PlayerController controller;
-    [SerializeField] Rigidbody rigid;
     [SerializeField] Camera targetCamera;
     [SerializeField] Transform heldItemParent;
 
     [Header("Interaction Options")]
     [SerializeField] float interactionDistance = 1.5f;
+    [SerializeField] float maxHoldOffset = 0.55f;
     [SerializeField] float rotationSensitivity = 3f;
     [SerializeField] float itemPositionSmoothing = 2f;
     [SerializeField] float itemRotationSmoothing = 15f;
@@ -29,6 +29,8 @@ public class InteractionManager : PlayerComponent
     private bool isHoldingItem { get { return HeldItem != null; } }
     IGrabbable storedItem = null;
     bool isUsingItem = false;
+
+    private Vector3 holdOffset = Vector3.zero;
 
     private void UpdateTargets()
     {
@@ -88,6 +90,11 @@ public class InteractionManager : PlayerComponent
         use = Input.GetButton(ControlBindings.USE_ITEM);
         swap = Input.GetButtonDown(ControlBindings.SWAP_ITEM);
         rotate = Input.GetButton(ControlBindings.ROTATE_ITEM);
+
+
+        float scrollDelta = Input.GetAxis(ControlBindings.HOLD_DISTANCE);
+        holdOffset.z = Mathf.Clamp(holdOffset.z + scrollDelta, 0f, maxHoldOffset);
+
 
         if (rotate && InterfaceUtil.IsNull(HeldItem) == false)
             controller.LookEnabled = false;
@@ -183,6 +190,8 @@ public class InteractionManager : PlayerComponent
         if (HeldItem != null || target == null || target.Locked)
             return;
 
+        holdOffset.z = 0f;
+
         target.Lock();
 
         target.transform.SetParent(heldItemParent);
@@ -263,14 +272,10 @@ public class InteractionManager : PlayerComponent
     // Held object is NOT kinematic, as it needs to interact with kinematic objects
     Vector3 heldItemTargetPosition = Vector3.zero;
     Quaternion heldItemTargetRotation = Quaternion.identity;
-    Quaternion previousRotation = Quaternion.identity;
     private void PositionHeldItem()
     {
         if (InterfaceUtil.IsNull(HeldItem) == false)
         {
-            Quaternion deltaRot = Quaternion.Inverse(previousRotation) * rigid.rotation;
-            HeldItem.transform.rotation = deltaRot * HeldItem.transform.rotation;
-
             IUsable usable = HeldItem as IUsable;
             if (isUsingItem && !InterfaceUtil.IsNull(usable))
             {
@@ -278,7 +283,7 @@ public class InteractionManager : PlayerComponent
 
                 // Skip the position smoothing if desired
                 if (usable.IgnorePositionSmoothing)
-                    HeldItem.transform.localPosition = usable.UseOffset;
+                    HeldItem.transform.localPosition = usable.UseOffset + holdOffset;
 
                 if (usable.UseRotation.Equals(Quaternion.identity) == false)
                 {
@@ -292,10 +297,10 @@ public class InteractionManager : PlayerComponent
                 heldItemTargetRotation = HeldItem.transform.localRotation;
             }
 
+            heldItemTargetPosition += holdOffset;
+
             HeldItem.transform.localPosition = Vector3.Lerp(HeldItem.transform.localPosition, heldItemTargetPosition, Time.deltaTime * itemPositionSmoothing);
             HeldItem.transform.localRotation = Quaternion.Slerp(HeldItem.transform.localRotation, heldItemTargetRotation, Time.deltaTime * itemRotationSmoothing);
         }
-
-        previousRotation = rigid.rotation;
     }
 }

@@ -19,4 +19,5 @@ public static class ControlBindings
     public static string ROTATE_ITEM = "Rotate Item";
 
     public static string TOOLTIP = "Tooltip";
+    public static string HOLD_DISTANCE = "Mouse ScrollWheel";
 }
