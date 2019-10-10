@@ -1,5 +1,5 @@
 # McBurgs
-## Unity Version: 2018.4
+## Unity Version: 2019.2.8f1
 A long time ago Citizen Burger Disorder inspired me to learn Unity, time to see if I can make something like it!
 
 ### The game is still early in development, but here are some examples of existing features:
