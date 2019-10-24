@@ -17,6 +17,7 @@ public class Player : NetworkBehaviour, IPausable
     {
         base.OnStartClient();
         camera.enabled = false;
+        camera.GetComponent<AudioListener>().enabled = false;
     }
 
     public override void OnStartLocalPlayer()
@@ -24,11 +25,14 @@ public class Player : NetworkBehaviour, IPausable
         base.OnStartLocalPlayer();
         
         camera.enabled = true;
+        camera.GetComponent<AudioListener>().enabled = false;
+
         Cursor.lockState = CursorLockMode.Locked;
 
         Gui = Instantiate(guiPrefab);
         pausableComponents = this.GetComponentsInChildren<IPausable>();
 
+        GameController.Instance.RegisterPlayer(this);
     } 
 
     public void Pause()

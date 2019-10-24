@@ -22,6 +22,11 @@ public class GameController : MonoBehaviour
     }
 
 
+    public void RegisterPlayer(Player player)
+    {
+        this.Player = player;
+    }
+
     public float Money { get; private set; }
     public void IncreaseMoney(float amount)
     {

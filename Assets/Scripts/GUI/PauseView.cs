@@ -10,11 +10,8 @@ public class PauseView : MonoBehaviour
 
     public bool IsPaused { get; private set; }
 
-    private Player player;
-
     private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag(TagManager.Player).GetComponent<Player>();
         resumeButton.onClick.AddListener(ResumeGame);
     }
 
@@ -24,7 +21,7 @@ public class PauseView : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
 
-        player.Unpause();
+        GameController.Instance.Player.Unpause();
         IsPaused = false;
     }
 
@@ -34,7 +31,7 @@ public class PauseView : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
 
-        player.Pause();
+        GameController.Instance.Player.Pause();
         IsPaused = true;
     }
 }
