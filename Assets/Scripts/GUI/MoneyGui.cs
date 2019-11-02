@@ -7,10 +7,10 @@ public class MoneyGui : MonoBehaviour
 {
     [SerializeField] Text moneyText;
 
-    private GameController gameController;
+    private ClientController gameController;
     private void Awake()
     {
-        gameController = GameController.Instance;
+        gameController = ClientController.Instance;
     }
 
     private void FixedUpdate()

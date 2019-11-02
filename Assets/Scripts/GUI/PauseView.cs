@@ -21,7 +21,7 @@ public class PauseView : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
 
-        GameController.Instance.Player.Unpause();
+        ClientController.Instance.Player.Unpause();
         IsPaused = false;
     }
 
@@ -31,7 +31,7 @@ public class PauseView : MonoBehaviour
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
 
-        GameController.Instance.Player.Pause();
+        ClientController.Instance.Player.Pause();
         IsPaused = true;
     }
 }

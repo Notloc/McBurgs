@@ -9,7 +9,7 @@ public class Money : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        GameController.Instance.IncreaseMoney(value);
+        ClientController.Instance.IncreaseMoney(value);
         Destroy(this.gameObject);
     }
 

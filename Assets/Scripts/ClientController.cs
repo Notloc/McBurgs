@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+public class ClientController : MonoBehaviour
 {
-    public static GameController Instance;
+    public static ClientController Instance;
 
     [Header("Prefabs")]
     [SerializeField] Player playerPrefab;
@@ -20,7 +20,6 @@ public class GameController : MonoBehaviour
         Instance = this;
         Money = startingCash;
     }
-
 
     public void RegisterPlayer(Player player)
     {

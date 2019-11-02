@@ -1325,7 +1325,7 @@ PrefabInstance:
     - target: {fileID: 4784689328459454267, guid: 222b8ccf1a177e543afbbe2508779989,
         type: 3}
       propertyPath: m_Name
-      value: GameController
+      value: ClientController
       objectReference: {fileID: 0}
     - target: {fileID: 4962679231476123166, guid: 222b8ccf1a177e543afbbe2508779989,
         type: 3}

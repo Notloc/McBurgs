@@ -85,6 +85,6 @@ public class BurgerComponent : MonoBehaviour, IBurgerComponent
 
     private void DropSelf()
     {
-        GameController.Instance.Player.GetComponent<InteractionManager>().Drop(usable);
+        ClientController.Instance.Player.GetComponent<InteractionManager>().Drop(usable);
     }
 }

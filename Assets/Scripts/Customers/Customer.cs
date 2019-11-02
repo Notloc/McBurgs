@@ -165,7 +165,7 @@ public class Customer : NetworkBehaviour
 
         orderReceived = true;
         burger = burg.GetComponent<FoodObject>();
-        GameController.Instance.Player.GetComponent<InteractionManager>().Drop(burger);
+        ClientController.Instance.Player.GetComponent<InteractionManager>().Drop(burger);
 
         burger.Rigidbody.isKinematic = true;
         burger.transform.SetParent(this.transform);
