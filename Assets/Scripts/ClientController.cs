@@ -5,10 +5,7 @@ using UnityEngine;
 public class ClientController : MonoBehaviour
 {
     public static ClientController Instance;
-
-    [Header("Prefabs")]
-    [SerializeField] Player playerPrefab;
-    
+  
     [Header("Options")]
     [SerializeField] Vector3 spawnPosition;
     [SerializeField] float startingCash = 100f;
@@ -21,7 +18,7 @@ public class ClientController : MonoBehaviour
         Money = startingCash;
     }
 
-    public void RegisterPlayer(Player player)
+    public void RegisterClientPlayer(Player player)
     {
         this.Player = player;
     }

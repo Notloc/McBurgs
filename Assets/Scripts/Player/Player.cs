@@ -33,7 +33,7 @@ public class Player : NetworkBehaviour, IPausable
         Gui = Instantiate(guiPrefab);
         pausableComponents = this.GetComponentsInChildren<IPausable>();
 
-        ClientController.Instance.RegisterPlayer(this);
+        ClientController.Instance.RegisterClientPlayer(this);
     } 
 
     public void Pause()
