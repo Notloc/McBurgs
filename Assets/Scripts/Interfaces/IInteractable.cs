@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInteractable : IGameObject
+public interface IInteractable : INetworkedObject
 {
     void Interact();
 }

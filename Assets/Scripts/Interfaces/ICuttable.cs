@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICuttable : IGameObject
+public interface ICuttable : INetworkedObject
 {
     void Cut(Collision collision);
 }

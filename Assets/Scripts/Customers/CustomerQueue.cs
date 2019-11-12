@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CustomerQueue : MonoBehaviour
+public class CustomerQueue : NetworkBehaviour
 {
     [Header("Required References")]
     [SerializeField] Transform entrance;
@@ -12,17 +13,20 @@ public class CustomerQueue : MonoBehaviour
     [SerializeField] int maxAllowedInQueue;
 
     public bool IsFull { get { return maxAllowedInQueue <= queuedCustomers.Count; } }
+    public bool IsEmpty { get { return queuedCustomers.Count == 0; } }
 
     public Transform Entrance { get { return entrance; } }
     public Transform Exit { get { return exit; } }
 
     private Queue<Customer> queuedCustomers = new Queue<Customer>();
 
+    [Server]
     public bool Contains(Customer cust)
     {
         return queuedCustomers.Contains(cust);
     }
 
+    [Server]
     public bool EnterQueue(Customer newCustomer)
     {
         if (!newCustomer || queuedCustomers.Count >= maxAllowedInQueue)
@@ -32,19 +36,19 @@ public class CustomerQueue : MonoBehaviour
         return true;
     }
 
+    [Server]
     public Customer DequeueCustomer()
     {
         return queuedCustomers.Dequeue();
     }
 
+    [ServerCallback]
     private void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-            queuedCustomers.Dequeue();
-
         UpdateStandingPositions();
     }
 
+    [Server]
     private void UpdateStandingPositions()
     {
         float i = 0f;

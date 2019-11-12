@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class CutEffect : MonoBehaviour, ICuttable
+public class CutEffect : NetworkBehaviour, ICuttable
 {
     [SerializeField] GameObject effectPrefab;
     [SerializeField] float effectCooldown = 0.5f;
@@ -11,6 +12,9 @@ public class CutEffect : MonoBehaviour, ICuttable
 
     public void Cut(Collision collision)
     {
+        if (collision == null)
+            return;
+
         ContactPoint contact = collision.GetContact(0);
         TryEffect(contact);
     }

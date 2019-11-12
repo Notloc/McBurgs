@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-
-public interface IGameObject
+public interface INetworkedObject : IGameObject
 {
-    GameObject gameObject { get; }
-    Transform transform { get; }
+    NetworkInstanceId netId { get; }
 }

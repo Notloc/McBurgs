@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class GrillObject : MonoBehaviour, IInteractable, IHaveTooltip
+public class GrillObject : NetworkBehaviour, IInteractable, IHaveTooltip
 {
     [SerializeField] TooltipData tooltipData;
     [SerializeField] Vector3 toolTipDisplayOffset;

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Money : MonoBehaviour, IInteractable
+public class Money : NetworkBehaviour, IInteractable
 {
     [SerializeField] float value = 1f;
     public float Value { get { return value; } }

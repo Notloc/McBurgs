@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Networking;
 
 /// <summary>
 /// Manages a player's interactions with items and interactables in the game world.
@@ -31,12 +30,13 @@ public class InteractionManager : PlayerComponent
     public IInteractable TargetInteractable { get; private set; }
     public Collider TargetCollider { get; private set; }
 
-    private bool isHoldingItem { get { return HeldItem != null; } }
+    private bool isHoldingItem { get { return !HeldItem.IsNull(); } }
     IGrabbable storedItem = null;
     bool isUsingItem = false;
 
     private Vector3 holdOffset = Vector3.zero;
 
+    [Client]
     private void UpdateTargets()
     {
         RaycastHit hit;
@@ -70,6 +70,7 @@ public class InteractionManager : PlayerComponent
         }
     }
 
+    [ClientCallback]
     private void Update()
     {
         if (!isLocalPlayer)
@@ -92,6 +93,7 @@ public class InteractionManager : PlayerComponent
 
     bool interactReady, interact, interactUp, use, swap, rotate;
     float interactPressTime;
+    [Client]
     private void TakeInput()
     {
         interact = Input.GetButtonDown(ControlBindings.INTERACT);
@@ -122,10 +124,28 @@ public class InteractionManager : PlayerComponent
     {
         bool interact = Input.GetButtonDown(ControlBindings.INTERACT);
 
-        if (interact)
-            target.Interact();
+        if (interact && !target.IsNull())
+            CmdInteraction(target.netId);
     }
 
+    [Command]
+    private void CmdInteraction(NetworkInstanceId netId)
+    {
+        if (NetworkServer.objects.ContainsKey(netId) == false)
+        {
+            Debug.Log("Invalid netId passed to server.");
+            return;
+        }
+
+        var obj = NetworkServer.objects[netId];
+        var target = obj.GetComponent<IInteractable>();
+        if (target.IsNull() == false)
+        {
+            target.Interact();
+        }
+    }
+
+    [Client]
     private void HandleHeldItems(IGrabbable target)
     {
         // Swap item in hand with inv
@@ -136,12 +156,12 @@ public class InteractionManager : PlayerComponent
         }
 
         // Pickup/Drop item
-        if (interact && interactReady)
+        if (!target.IsNull() && interact && interactReady)
         {
             if (!isHoldingItem)
             {
                 interactReady = false;
-                PickUpItem(target);
+                PickUpItem(target.netId);
             }
             return;
         }
@@ -160,16 +180,17 @@ public class InteractionManager : PlayerComponent
             }
         }
 
-        if (HeldItem as IUsable != null)
+        IUsable usable = HeldItem as IUsable;
+        if (usable != null)
         {
             // Use/Stop using held item
             if (use && isHoldingItem)
             {
-                UseItem(HeldItem as IUsable);
+                UseItem(usable);
             }
             else if (!use && isHoldingItem)
             {
-                StopUsingItem(HeldItem as IUsable);
+                StopUsingItem(usable);
             }
         }
 
@@ -177,6 +198,7 @@ public class InteractionManager : PlayerComponent
             RotateItem();
     }
 
+    [Client]
     private void RotateItem()
     {
         if (HeldItem.IsNull())
@@ -215,8 +237,10 @@ public class InteractionManager : PlayerComponent
 
     // PICKUP/DROP FUNCTIONS
     //
-    private void PickUpItem(IGrabbable target)
+    private void PickUpItem(NetworkInstanceId grabbableId)
     {
+        IGrabbable target = ClientScene.objects[grabbableId].GetComponent<IGrabbable>();
+
         if (HeldItem != null || target == null || target.Locked)
             return;
 
@@ -227,15 +251,32 @@ public class InteractionManager : PlayerComponent
         else
             holdOffset = Vector3.zero;
 
-        target.Lock();
-
         target.transform.SetParent(heldItemParent);
 
         if (target.GrabRotation.Equals(Quaternion.identity) == false)
             target.transform.localRotation = Quaternion.Euler(0f, target.transform.localRotation.eulerAngles.y, 0f);
 
         HeldItem = target;
+
+        if (!isServer)
+            CmdPickUpItem(grabbableId);
+        else
+            target.Lock();
     }
+
+    [Command]
+    private void CmdPickUpItem(NetworkInstanceId grabbableId)
+    {
+        IGrabbable target = NetworkServer.objects[grabbableId].GetComponent<IGrabbable>();
+
+        if (target == null || target.Locked)
+            return;
+
+        target.Lock();
+        target.transform.SetParent(heldItemParent);
+        target.gameObject.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+    }
+
     private Vector3 CalculateGrabOffset(Ray line, Vector3 origin, Vector3 location)
     {
         int iterations = 30;
@@ -263,12 +304,17 @@ public class InteractionManager : PlayerComponent
         return new Vector3(0f, 0f, step * closestIndex);
     }
 
+    public void Drop(IGrabbable item)
+    {
+        if (HeldItem == item)
+            DropItem(item);
+    }
     private void DropItem(IGrabbable item)
     {
         if (item.IsNull())
             return;
 
-        item.Unlock();
+        
 
         item.gameObject.transform.SetParent(null);
 
@@ -277,19 +323,45 @@ public class InteractionManager : PlayerComponent
             HeldItem = null;
             StopUsingItem(item as IUsable);
         }
-    }
-    public void Drop(IGrabbable grabbable)
-    {
-        DropItem(grabbable);
-    }
-    //
 
+        if (!isServer)
+            CmdDropItem(item.netId);
+        else
+            item.Unlock();
+    }
+    [Command]
+    private void CmdDropItem(NetworkInstanceId grabbableId)
+    {
+        IGrabbable item = NetworkServer.objects[grabbableId].GetComponent<IGrabbable>();
+        if (item.IsNull())
+            return;
+
+        item.Unlock(); 
+        item.gameObject.transform.SetParent(null);
+
+        var netIdentity = item.gameObject.GetComponent<NetworkIdentity>();
+        if (netIdentity.clientAuthorityOwner == connectionToClient)
+            netIdentity.RemoveClientAuthority(connectionToClient);
+    }
+    
     private void ThrowItem(IGrabbable item)
     {
         if (item.IsNull())
             return;
 
-        DropItem(item);
+        if (item == HeldItem)
+            DropItem(item);
+
+        CmdThrowItem(item.netId);
+    }
+
+    [Command]
+    private void CmdThrowItem(NetworkInstanceId grabbableId)
+    {
+        IGrabbable item = NetworkServer.objects[grabbableId].GetComponent<IGrabbable>();
+        if (item.IsNull())
+            return;
+
         item.Rigidbody.AddForce(targetCamera.transform.forward * throwForce, ForceMode.Impulse);
     }
 
@@ -329,13 +401,13 @@ public class InteractionManager : PlayerComponent
 
         if (wasStored != null)
         {
-            PickUpItem(wasStored);
+            PickUpItem(wasStored.netId);
         }
     }
     //
 
 
-
+    [ClientCallback]
     private void LateUpdate()
     {
         if (!isLocalPlayer)

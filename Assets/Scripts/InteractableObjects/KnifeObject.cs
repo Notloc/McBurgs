@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Networking;
 
 public class KnifeObject : ItemObject, IUsable
 {
@@ -82,6 +83,14 @@ public class KnifeObject : ItemObject, IUsable
         if (cuttable.IsNull() == false)
         {
             cuttable.Cut(collision);
+            CmdCut(cuttable.netId);
         }
+    }
+
+    [Command]
+    private void CmdCut(NetworkInstanceId id)
+    {
+        var cuttable = NetworkServer.objects[id].GetComponent<ICuttable>();
+        cuttable.Cut(null);
     }
 }

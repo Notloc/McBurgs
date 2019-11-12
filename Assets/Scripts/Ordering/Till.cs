@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Till : MonoBehaviour, IInteractable
+public class Till : NetworkBehaviour, IInteractable
 {
     [Header("Required Reference")]
     [SerializeField] CustomerQueue orderQueue;
@@ -16,6 +17,8 @@ public class Till : MonoBehaviour, IInteractable
     public WaitingArea WaitingArea { get { return waitingArea; } }
 
     private Customer customer;
+
+    [Server]
     public void Interact()
     {
         if (!waitingArea.IsFull && !customer)
@@ -24,8 +27,12 @@ public class Till : MonoBehaviour, IInteractable
             SubmitOrder();
     }
 
+    [Server]
     private void TakeOrder()
     {
+        if (orderQueue.IsEmpty)
+            return;
+
         customer = orderQueue.DequeueCustomer();
         customer.ShowOrder(orderDisplayTime);
 
@@ -34,11 +41,13 @@ public class Till : MonoBehaviour, IInteractable
         ShowOrderTakingControls();
     }
 
+    [Server]
     private void ShowOrderTakingControls()
     {
 
     }
 
+    [Server]
     private void SubmitOrder()
     {
         waitingArea.EnterArea(customer);

@@ -47,6 +47,8 @@ public class Player : NetworkBehaviour, IPausable
                 component.Pause();
 
         IsPaused = true;
+
+        Debug.Log(connectionToClient == connectionToServer);
     }
 
     public void Unpause()
