@@ -83,7 +83,8 @@ public class KnifeObject : ItemObject, IUsable
         if (cuttable.IsNull() == false)
         {
             cuttable.Cut(collision);
-            CmdCut(cuttable.netId);
+            if (!isServer)
+                CmdCut(cuttable.netId);
         }
     }
 

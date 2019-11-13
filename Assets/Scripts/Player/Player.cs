@@ -34,7 +34,13 @@ public class Player : NetworkBehaviour, IPausable
         pausableComponents = this.GetComponentsInChildren<IPausable>();
 
         ClientController.Instance.RegisterClientPlayer(this);
-    } 
+    }
+
+    private void OnDestroy()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = true;
+    }
 
     public void Pause()
     {

@@ -20,6 +20,7 @@ public class PauseView : MonoBehaviour
         this.gameObject.SetActive(false);
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         ClientController.Instance.Player.Unpause();
         IsPaused = false;
@@ -30,6 +31,7 @@ public class PauseView : MonoBehaviour
         this.gameObject.SetActive(true);
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
         ClientController.Instance.Player.Pause();
         IsPaused = true;

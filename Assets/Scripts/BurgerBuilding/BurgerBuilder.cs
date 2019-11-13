@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BurgerBuilder : MonoBehaviour
+public class BurgerBuilder : NetworkBehaviour
 {
-    private static string BURGER_BUILDER_TAG = "BurgerBuilder";
-
     [Header("Required Reference")]
     [SerializeField] BurgerNode startNode;
     [SerializeField] BurgerScorer scorer;
@@ -19,110 +18,118 @@ public class BurgerBuilder : MonoBehaviour
     [SerializeField] [Range(0f,0.1f)] float animationStrength = 0.01f;
     [SerializeField] float animationLength = 0.4f;
 
-    BurgerNode activeNode;
+
+    public BurgerNode ActiveNode { get; private set; }
     BurgerNode previousNode;
     List<IBurgerComponent> burgerComponents;
 
     private void Awake()
     {
         burgerComponents = new List<IBurgerComponent>();
-        activeNode = startNode;
+        ActiveNode = startNode;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        string tag = other.tag;
-        if (tag.Equals(BURGER_BUILDER_TAG))
-            return;
-
-        var node = other.GetComponent<BurgerNode>();
-        if (node)
-            if (ValidateCollision(node))
-                Attach(node);
-    }
-
-    private bool ValidateCollision(BurgerNode node)
-    {
-        if (!activeNode || !node)
-            return false;
-
-        // Valid collision only if the nodes are not on the same side of the burger components
-        bool activeAbove = activeNode.IsAboveBurgerComponent();
-        bool newAbove = node.IsAboveBurgerComponent();
-
-        return (activeAbove != newAbove);
-    }
-
-    private void Attach(BurgerNode node)
+    [Server]
+    public void Attach(BurgerNode node, NodeLocation nodeLoc)
     {
         var component = node.GetComponentInParent<IBurgerComponent>();
         if (component.IsNull())
             return;
 
-        previousNode = activeNode;
+        previousNode = ActiveNode;
         previousNode.Disable();
 
-        activeNode = component.AttachTo(this, activeNode, node);
+        ActiveNode = component.AttachTo(this, ActiveNode, node);
 
         burgerComponents.Add(component);
         StartCoroutine(AttachAnimation());
+
+        if (!isClient)
+            RpcAttach(component.netId, nodeLoc);
     } 
+
+    [ClientRpc]
+    private void RpcAttach(NetworkInstanceId componentId, NodeLocation nodeLoc)
+    {
+        var component = ClientScene.objects[componentId].GetComponent<IBurgerComponent>();
+        if (component.IsNull())
+            return;
+
+        var node = component.GetNode(nodeLoc);
+
+        previousNode = ActiveNode;
+        previousNode.Disable();
+
+        ActiveNode = component.AttachTo(this, ActiveNode, node);
+
+        burgerComponents.Add(component);
+        StartCoroutine(AttachAnimation());
+    }
 
     private IEnumerator AttachAnimation()
     {
-        if (activeNode)
-            activeNode.Disable();
+        if (ActiveNode)
+            ActiveNode.Disable();
 
-        int i = 0;
-
-        // Cache all the original position values
-        Vector3[] originalOffsets = new Vector3[burgerComponents.Count];
-        foreach (IBurgerComponent component in burgerComponents)
+        // Client animation and detachment
+        if (isClient)
         {
-            originalOffsets[i] = component.transform.localPosition;
-            i++;
-        }
+            int i = 0;
 
-        // Animate over time
-        float startTime = Time.time;
-        bool validatedNewComponent = false, result = false;
-        while (startTime + animationLength > Time.time)
-        {
-            float progress = (Time.time - startTime) / animationLength;
-            Vector3 up = this.transform.up;
+            // Cache all the original position values
+            Vector3[] originalOffsets = new Vector3[burgerComponents.Count];
+            foreach (IBurgerComponent component in burgerComponents)
+            {
+                originalOffsets[i] = component.transform.localPosition;
+                i++;
+            }
+        
+            // Animate over time
+            float startTime = Time.time;
+            bool validatedNewComponent = false, result = false;
+            while (startTime + animationLength > Time.time)
+            {
+                float progress = (Time.time - startTime) / animationLength;
+                Vector3 up = this.transform.up;
 
+                i = 0;
+                foreach (IBurgerComponent component in burgerComponents)
+                {
+                    SetLocalYOffset(component.transform, progress, originalOffsets[i], up);
+                    i++;
+                }
+
+                // Half way through the animation, Check if the newest piece should fall off
+                if (!validatedNewComponent && progress > 0.5f)
+                {
+                    result = ValidateNewComponent();
+                    if (!result)
+                        DetachNewComponent();
+
+                    validatedNewComponent = true;
+                }
+
+                yield return null;
+            }
+            
+            // Restore offsets
             i = 0;
             foreach (IBurgerComponent component in burgerComponents)
             {
-                SetLocalYOffset(component.transform, progress, originalOffsets[i], up);
+                SetLocalYOffset(component.transform, 1f, originalOffsets[i], Vector3.zero);
                 i++;
             }
-
-            // Half way through the animation, Check if the newest piece should fall off
-            if (!validatedNewComponent && progress > 0.5f)
-            {
-                result = ValidateNewComponent();
-                if (!result)
-                    DetachNewComponent();
-
-                validatedNewComponent = true;
-            }
-
-            yield return null;
+        }
+        // Server detachment
+        else
+        {
+            if (!ValidateNewComponent())
+                DetachNewComponent();
         }
 
-        // Restore offsets
-        i = 0;
-        foreach (IBurgerComponent component in burgerComponents)
+        if (ActiveNode)
         {
-            SetLocalYOffset(component.transform, 1f, originalOffsets[i], Vector3.zero);
-            i++;
-        }
-
-        if (activeNode)
-        {
-            activeNode.gameObject.tag = BURGER_BUILDER_TAG;
-            activeNode.Enable();
+            ActiveNode.Enable();
         }
         else
             FinishBurger();
@@ -132,6 +139,7 @@ public class BurgerBuilder : MonoBehaviour
         component.localPosition = originalPos;
         component.position -= relativeUp * (animationStrength * Mathf.Sin(progress * Mathf.PI));
     }
+
 
     private void FinishBurger()
     {
@@ -177,7 +185,7 @@ public class BurgerBuilder : MonoBehaviour
 
         burgerComponents.Remove(newest);
 
-        activeNode = previousNode;
+        ActiveNode = previousNode;
     }
 
     private Vector2 CalculateCenterOfComponents()

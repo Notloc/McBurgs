@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BurgerNode : MonoBehaviour
+public class BurgerNode : MonoBehaviour, IGameObject
 {
     [SerializeField] Collider[] nodeColliders;
 
@@ -35,4 +35,10 @@ public class BurgerNode : MonoBehaviour
 
         return false;
     }
+}
+
+public enum NodeLocation
+{
+    Top,
+    Bottom
 }

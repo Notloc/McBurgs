@@ -314,8 +314,6 @@ public class InteractionManager : PlayerComponent
         if (item.IsNull())
             return;
 
-        
-
         item.gameObject.transform.SetParent(null);
 
         if (item == HeldItem)

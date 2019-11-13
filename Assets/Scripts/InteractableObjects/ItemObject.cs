@@ -68,7 +68,6 @@ public class ItemObject : NetworkBehaviour, IGrabbable
     }
 
     // Change the objects referenced rigidbody
-    [Server]
     public void ChangeRigidbody(Rigidbody newRigid)
     {
         var identity = newRigid.GetComponent<NetworkIdentity>();
@@ -76,7 +75,7 @@ public class ItemObject : NetworkBehaviour, IGrabbable
             return;
 
         rigidbody = newRigid;
-        RpcChangeRigidbody(identity.netId);
+        //RpcChangeRigidbody(identity.netId);
     }
     [ClientRpc]
     private void RpcChangeRigidbody(NetworkInstanceId id)
