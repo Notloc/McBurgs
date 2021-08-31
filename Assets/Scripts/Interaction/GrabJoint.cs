@@ -12,7 +12,7 @@ public class GrabJoint : MonoBehaviour
         if (!HasGrabbedObject)
         {
             GrabbedObject = grabObj;
-            GrabbedObject.Physics.KinematicallyAttach(transform);
+            //GrabbedObject.Physics.KinematicallyAttach(transform);
         }
     }
 
@@ -21,7 +21,7 @@ public class GrabJoint : MonoBehaviour
         if (HasGrabbedObject)
         {
             GrabbedObject.transform.SetParent(null);
-            GrabbedObject.Physics.Detach();
+           // GrabbedObject.Physics.Detach();
             GrabbedObject = null;
         }
     }

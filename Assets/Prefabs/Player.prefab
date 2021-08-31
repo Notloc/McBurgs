@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 4951318668590230021}
   - component: {fileID: 113142274464808361}
   m_Layer: 6
-  m_Name: PlayerBody
+  m_Name: PlayerRigid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -91,9 +91,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3665467772878247677}
   - {fileID: 1289012037794662393}
-  - {fileID: 3665467772541186595}
+  - {fileID: 3665467772878247677}
   m_Father: {fileID: 3665467773416995314}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -140,6 +139,7 @@ MonoBehaviour:
   controlState: {fileID: 4146210564407286912}
   movementForce: 650
   antiGravityStrength: 0.5
+  bodyTransform: {fileID: 3665467772878247677}
 --- !u!114 &5461186566315997866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlState: {fileID: 4146210564407286912}
+  bodyTransform: {fileID: 3665467772878247677}
   headTransform: {fileID: 3665467772541186595}
 --- !u!114 &4995807836048438752
 MonoBehaviour:
@@ -228,7 +229,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7916198624953796930}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &5038358334341720446
 CapsuleCollider:
@@ -281,12 +282,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3665467772541186596}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.435, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.59444445, z: 0}
+  m_LocalScale: {x: 1.4285713, y: 1.1111112, z: 1.4285713}
   m_Children:
   - {fileID: 3280178904891467719}
-  m_Father: {fileID: 7916198624953796930}
-  m_RootOrder: 2
+  m_Father: {fileID: 3665467772878247677}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3665467772878247678
 GameObject:
@@ -300,7 +301,7 @@ GameObject:
   - component: {fileID: 3665467772878247674}
   - component: {fileID: 3665467772878247675}
   m_Layer: 6
-  m_Name: Graphics
+  m_Name: Body(Graphics)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -316,9 +317,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 0.7, y: 0.9, z: 0.7}
-  m_Children: []
+  m_Children:
+  - {fileID: 3665467772541186595}
   m_Father: {fileID: 7916198624953796930}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3665467772878247674
 MeshFilter:

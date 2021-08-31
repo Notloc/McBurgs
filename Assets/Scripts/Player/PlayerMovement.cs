@@ -10,15 +10,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] PlayerControlState controlState = null;
     [SerializeField] float movementForce = 10f;
     [SerializeField, Range(0f, 1f)] float antiGravityStrength = 0.9f;
+    [SerializeField] Transform bodyTransform = null;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
-    }
-
-    public void UpdateRotation(Quaternion newRotation)
-    {
-        rigid.rotation = newRotation;
     }
 
     public void Move(Vector2 input)
@@ -27,15 +23,18 @@ public class PlayerMovement : MonoBehaviour
         if (inputIsInDeadzone || !controlState.CanMove)
             return;
 
+        if (input.sqrMagnitude > 1f)
+            input = input.normalized;
+
         Vector3 force = CalculateMovementForce(input);
-        rigid.AddRelativeForce(force);
+        rigid.AddForce(force);
     }
 
     private Vector3 CalculateMovementForce(Vector2 input)
     {
         Vector3 movementForce = new Vector3(input.x, 0f, input.y) * this.movementForce;
         Vector3 antiGravityForce = GetAntiGravityForce();
-        return movementForce + antiGravityForce;
+        return bodyTransform.rotation * (movementForce + antiGravityForce);
     }
 
     private Vector3 GetAntiGravityForce()
