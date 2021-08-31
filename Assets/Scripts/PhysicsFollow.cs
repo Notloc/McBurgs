@@ -2,24 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PhysicsFollow : MonoBehaviour
 {
-    [SerializeField] Rigidbody rigid = null;
     [SerializeField] Transform target = null;
-
-    Quaternion previousRotation;
-
-    private void Start()
+    
+    private Quaternion previousRotation = Quaternion.identity;
+    private Rigidbody rigid;
+    
+    private void Awake()
     {
-        previousRotation = target.rotation;
+        rigid = GetComponent<Rigidbody>();
+    }
+
+    public void SetTarget(Transform target)
+    {
+        this.target = target;
+        if (target)
+        {
+            previousRotation = target.rotation;
+        }
     }
 
     private void FixedUpdate()
     {
+        if (!target)
+            return;
+
         Quaternion deltaRotation = target.rotation * Quaternion.Inverse(previousRotation);
 
         rigid.MovePosition(target.position);
-        rigid.MoveRotation(rigid.rotation * deltaRotation);
+        rigid.MoveRotation(deltaRotation * rigid.rotation);
 
         previousRotation = target.rotation;
     }
