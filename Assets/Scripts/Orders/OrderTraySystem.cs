@@ -36,7 +36,7 @@ public class OrderTraySystem : MonoBehaviour
     private void ConnectItemToTrayWithJoint(PhysicsComponent objectWithPhysics, Collision collision)
     {
         ConfigurableJoint joint = gameObject.AddComponent<ConfigurableJoint>();
-        orderItemJointSettings.ApplySettings(joint, objectWithPhysics.Rigidbody.mass);
+        orderItemJointSettings.Apply(joint, objectWithPhysics.Rigidbody.mass);
 
         Vector3 contactPoint = collision.GetContact(0).point;
 

@@ -32,7 +32,7 @@ public class GrabJoint : MonoBehaviour
         ApplySpringRigidbodySettings(targetRigid);
 
         configJoint = gameObject.AddComponent<ConfigurableJoint>();
-        configurableJointSettings.ApplySettings(configJoint, targetRigid.mass);
+        configurableJointSettings.Apply(configJoint, targetRigid.mass);
         configJoint.connectedBody = targetRigid;
     }
 

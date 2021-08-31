@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] PlayerMovement playerMovement = null;
-    [SerializeField] PlayerCamera playerCamera = null;
     [SerializeField] GrabSystem grabSystem = null;
 
     private Vector2 movementInput;
@@ -14,8 +13,6 @@ public class PlayerInput : MonoBehaviour
     private void Update()
     {
         //TakeInput();
-
-
         TakeFixedInput();
     }
 

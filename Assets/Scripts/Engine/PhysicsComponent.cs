@@ -8,11 +8,17 @@ public class PhysicsComponent : MonoBehaviour
     [SerializeField] Transform attachmentPoint = null;
 
     public Rigidbody Rigidbody { get; private set; }
+    public bool IsConnectedToJoint { get; private set; }
     public bool IsLocked { get; private set; } = false;
 
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody>();
+    }
+
+    public void SetConnectedToJoint(bool isConnectedToJoint)
+    {
+        IsConnectedToJoint = isConnectedToJoint;
     }
 
     public void SetLock(bool isLocked)
