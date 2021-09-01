@@ -15,6 +15,18 @@ public class OrderTraySystem : MonoBehaviour
         physics = GetComponent<PhysicsComponent>();
     }
 
+    public List<OrderItem> GetOrderItems()
+    {
+        List<OrderItem> orderItems = new List<OrderItem>();
+
+        foreach (IOrderItemProvider provider in orderItemProviders)
+        {
+            orderItems.Add(provider.GetOrderItem());
+        }
+
+        return orderItems;
+    }
+
     private void OnCollisionEnter(Collision collision)
 {
         IOrderItemProvider orderItem = collision.gameObject.GetComponentInParent<IOrderItemProvider>();
@@ -46,15 +58,5 @@ public class OrderTraySystem : MonoBehaviour
         joint.connectedBody = objectWithPhysics.Rigidbody;
     }
 
-    public List<OrderItem> GetOrderItems()
-    {
-        List<OrderItem> orderItems = new List<OrderItem>();
-
-        foreach (IOrderItemProvider provider in orderItemProviders)
-        {
-            orderItems.Add(provider.GetOrderItem());
-        }
-
-        return orderItems;
-    }
+    
 }

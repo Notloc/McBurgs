@@ -32,7 +32,7 @@ public class RigidbodyConfiguration
         this.contraints = rigidbody.constraints;
     }
 
-    public void ApplyConfiguration(Rigidbody rigidbody)
+    public void Apply(Rigidbody rigidbody)
     {
         rigidbody.mass = this.mass;
         rigidbody.drag = this.drag;

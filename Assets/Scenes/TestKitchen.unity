@@ -3306,7 +3306,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18436
+  m_Name: pb_Mesh33484
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4030,7 +4030,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh18350
+  m_Name: pb_Mesh33398
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4458,7 +4458,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 354443762}
 --- !u!33 &1597498733
@@ -5450,6 +5450,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3665467773416995315, guid: 9287f12fdb47e014c9cbd2d299987794, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9287f12fdb47e014c9cbd2d299987794, type: 3}
 --- !u!1001 &3679022042090709642
@@ -5563,6 +5567,14 @@ PrefabInstance:
     - target: {fileID: 8095031341191362395, guid: 55faabebbcec4d748833a4c599b7a4e6, type: 3}
       propertyPath: orderItemJointSettings.breakForce
       value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095031341191362395, guid: 55faabebbcec4d748833a4c599b7a4e6, type: 3}
+      propertyPath: orderItemJointSettings.motionMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8095031341191362395, guid: 55faabebbcec4d748833a4c599b7a4e6, type: 3}
+      propertyPath: orderItemJointSettings.rotationMode
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8095031341191362398, guid: 55faabebbcec4d748833a4c599b7a4e6, type: 3}
       propertyPath: m_Name

@@ -11,8 +11,4 @@ public class GrabbableObject : MonoBehaviour
     {
         Physics = GetComponent<PhysicsComponent>();
     }
-
-
-
-
 }

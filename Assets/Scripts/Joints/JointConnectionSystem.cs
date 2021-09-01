@@ -107,7 +107,7 @@ public abstract class JointConnectionSystem : MonoBehaviour
         {
             PhysicsComponent physics = targetObject.GetComponent<PhysicsComponent>();
             physics.SetConnectedToJoint(false);
-            rigidbodyConfigsByObject[targetObject].ApplyConfiguration(physics.Rigidbody);
+            rigidbodyConfigsByObject[targetObject].Apply(physics.Rigidbody);
         }
         rigidbodyConfigsByObject.Remove(targetObject);
 

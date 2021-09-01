@@ -64,7 +64,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11de668fcd21a2743893b902f6657099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachmentPoint: {fileID: 0}
 --- !u!114 &8095031341191362399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,10 +89,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orderItemJointSettings:
+    enableCollision: 0
     autoConfigureAnchor: 1
     connectedAnchorPosition: {x: 0, y: 0, z: 0}
     anchorPosition: {x: 0, y: 0, z: 0}
-    enableCollision: 0
+    motionMode: 2
+    rotationMode: 2
     linearLimit: 0
     bounciness: 0.5
     springForce: 0
@@ -139,7 +140,7 @@ BoxCollider:
   m_GameObject: {fileID: 8095031342160403716}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.015, z: 0.5}
   m_Center: {x: 0, y: 0.03, z: 0}

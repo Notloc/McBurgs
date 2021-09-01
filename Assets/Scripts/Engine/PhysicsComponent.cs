@@ -6,8 +6,17 @@ using UnityEngine;
 public class PhysicsComponent : MonoBehaviour
 {
     public Rigidbody Rigidbody { get; private set; }
+    public RigidbodyOverrides RigidbodyOverrides {
+        get {
+            if (_rigidbodyOverrides == null)
+                _rigidbodyOverrides = new RigidbodyOverrides(Rigidbody);
+            return _rigidbodyOverrides;
+        }
+    }
+    private RigidbodyOverrides _rigidbodyOverrides;
+
     public bool IsConnectedToJoint { get; private set; }
-    public bool IsLocked { get; private set; } = false;
+    public bool IsLocked { get => Rigidbody.isKinematic || IsConnectedToJoint; }
 
     private void Awake()
     {
@@ -17,19 +26,5 @@ public class PhysicsComponent : MonoBehaviour
     public void SetConnectedToJoint(bool isConnectedToJoint)
     {
         IsConnectedToJoint = isConnectedToJoint;
-    }
-
-    public void SetLock(bool isLocked)
-    {
-        if (this.IsLocked == isLocked)
-            return;
-
-        IsLocked = isLocked;
-        UpdateRigidbody(IsLocked);
-    }
-
-    private void UpdateRigidbody(bool isLocked)
-    {
-        Rigidbody.isKinematic = isLocked;
     }
 }

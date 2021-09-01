@@ -5,25 +5,28 @@ using UnityEngine;
 [System.Serializable]
 public class ConfigurableJointSettings
 {
+    [SerializeField] bool enableCollision;
+    
     [Header("Anchors")]
     [SerializeField] bool autoConfigureAnchor;
     [SerializeField] Vector3 connectedAnchorPosition;
     [SerializeField] Vector3 anchorPosition;
 
-    [SerializeField] bool enableCollision;
+    [Header("Motion Limits")]
+    [SerializeField] ConfigurableJointMotion motionMode = ConfigurableJointMotion.Free;
+
+    [Header("Rotation Limits")]
+    [SerializeField] ConfigurableJointMotion rotationMode = ConfigurableJointMotion.Free;
 
     [Header("Linear Joint")]
     [SerializeField] float linearLimit = 0f;
-    [SerializeField] float bounciness = 0.5f;
+    [SerializeField] float bounciness = 0f;
 
     [Header("Linear Spring")]
     [SerializeField] float springForce = 0f;
     [SerializeField] float springDamper = 0f;
 
-
-
     [SerializeField] float breakForce = float.PositiveInfinity;
-
 
     public void Apply(ConfigurableJoint configJoint)
     {
@@ -40,13 +43,13 @@ public class ConfigurableJointSettings
         }
         configJoint.enableCollision = enableCollision;
 
-        configJoint.xMotion = ConfigurableJointMotion.Limited;
-        configJoint.yMotion = ConfigurableJointMotion.Limited;
-        configJoint.zMotion = ConfigurableJointMotion.Limited;
+        configJoint.xMotion = motionMode;
+        configJoint.yMotion = motionMode;
+        configJoint.zMotion = motionMode;
 
-        configJoint.angularXMotion = ConfigurableJointMotion.Limited;
-        configJoint.angularYMotion = ConfigurableJointMotion.Limited;
-        configJoint.angularZMotion = ConfigurableJointMotion.Limited;
+        configJoint.angularXMotion = rotationMode;
+        configJoint.angularYMotion = rotationMode;
+        configJoint.angularZMotion = rotationMode;
 
         SoftJointLimitSpring springSettings = new SoftJointLimitSpring();
         springSettings.spring = springForce * multiplier;
