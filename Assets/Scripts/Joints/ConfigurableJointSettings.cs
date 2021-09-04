@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class ConfigurableJointSettings
@@ -12,8 +13,11 @@ public class ConfigurableJointSettings
     [SerializeField] Vector3 connectedAnchorPosition;
     [SerializeField] Vector3 anchorPosition;
 
-    [Header("Motion Limits")]
+    [Header("Motion")]
     [SerializeField] ConfigurableJointMotion motionMode = ConfigurableJointMotion.Free;
+    [SerializeField] float motionDrive = 0f;
+    [SerializeField] float motionDamp = 0f;
+
 
     [Header("Rotation Limits")]
     [SerializeField] ConfigurableJointMotion rotationMode = ConfigurableJointMotion.Free;
@@ -46,6 +50,15 @@ public class ConfigurableJointSettings
         configJoint.xMotion = motionMode;
         configJoint.yMotion = motionMode;
         configJoint.zMotion = motionMode;
+
+        JointDrive jointDrive = new JointDrive();
+        jointDrive.positionSpring = motionDrive;
+        jointDrive.positionDamper = motionDamp;
+        jointDrive.maximumForce = float.MaxValue;
+
+        configJoint.xDrive = jointDrive;
+        configJoint.yDrive = jointDrive;
+        configJoint.zDrive = jointDrive;
 
         configJoint.angularXMotion = rotationMode;
         configJoint.angularYMotion = rotationMode;

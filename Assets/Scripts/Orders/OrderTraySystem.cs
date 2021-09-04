@@ -56,6 +56,8 @@ public class OrderTraySystem : MonoBehaviour
         joint.connectedAnchor = objectWithPhysics.transform.InverseTransformPoint(contactPoint);
 
         joint.connectedBody = objectWithPhysics.Rigidbody;
+
+        objectWithPhysics.RigidbodyOverrides.Interpolation.Set(RigidbodyInterpolation.Interpolate);
     }
 
     
