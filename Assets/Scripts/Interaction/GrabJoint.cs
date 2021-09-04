@@ -32,6 +32,7 @@ public class GrabJoint : MonoBehaviour
 
         joint.connectedBody = target.Rigidbody;
         target.RigidbodyOverrides.Interpolation.Set(RigidbodyInterpolation.Interpolate);
+        target.SetConnectedToJoint(true);
     }
 
     public void DropObject()
