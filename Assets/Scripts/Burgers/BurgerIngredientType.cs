@@ -4,6 +4,8 @@ using UnityEngine;
 
 public enum BurgerIngredientType
 {
+    BUN_TOP = 0,
+
     MEAT_PATTY = 10,
     CHICKEN_PATTY,
 

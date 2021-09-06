@@ -32,12 +32,4 @@ public class BurgerAttachableComponent : MonoBehaviour
     {
         IsAttached = isAttached;
     }
-
-    private void OnValidate()
-    {
-        if (graphicsPrefab && transform.childCount == 0)
-        {
-            Instantiate(graphicsPrefab, transform);
-        }
-    }
 }

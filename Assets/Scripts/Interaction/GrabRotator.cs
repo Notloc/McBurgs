@@ -21,7 +21,7 @@ public class GrabRotator : MonoBehaviour
             float yInput = Input.GetAxis("Mouse Y");
             float spinInput = Input.GetAxis("Horizontal");
             Quaternion inverseCamera = Quaternion.Inverse(cameraT.rotation);
-            transform.rotation = (cameraT.rotation * Quaternion.Euler(yInput, spinInput, xInput) * inverseCamera) * transform.rotation;
+            transform.rotation = (cameraT.rotation * Quaternion.Euler(yInput, spinInput, -xInput) * inverseCamera) * transform.rotation;
         }
     }
 

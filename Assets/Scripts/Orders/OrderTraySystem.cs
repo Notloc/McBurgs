@@ -28,7 +28,16 @@ public class OrderTraySystem : MonoBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-{
+    {
+        IOrderItemProvider orderItem = collision.gameObject.GetComponentInParent<IOrderItemProvider>();
+        if (orderItem == null || orderItem.Physics.IsLocked)
+            return;
+
+        AttachOrderItemToTray(orderItem, collision);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
         IOrderItemProvider orderItem = collision.gameObject.GetComponentInParent<IOrderItemProvider>();
         if (orderItem == null || orderItem.Physics.IsLocked)
             return;

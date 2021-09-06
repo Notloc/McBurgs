@@ -4,12 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(PhysicsComponent))]
 public class BurgerSystem : MonoBehaviour, IOrderItemProvider
 {
-    [SerializeField] Transform attachmentTrigger = null;
+    [SerializeField] Collider attachmentTrigger = null;
     [SerializeField] float attachmentThreshold = 0.2f;
 
     public PhysicsComponent Physics { get; private set; }
     
-    private List<BurgerIngredient> burgerIngredients = new List<BurgerIngredient>();
+    public List<BurgerIngredient> burgerIngredients = new List<BurgerIngredient>();
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class BurgerSystem : MonoBehaviour, IOrderItemProvider
 
     private void HandleAttachable(BurgerAttachableComponent attachable)
     {
-        float distance = (attachable.transform.position - attachmentTrigger.position).magnitude;
+        float distance = (attachable.transform.position - attachmentTrigger.transform.position).magnitude;
         if (distance < attachmentThreshold)
         {
             Attach(attachable);
@@ -42,12 +42,18 @@ public class BurgerSystem : MonoBehaviour, IOrderItemProvider
 
     private void Attach(BurgerAttachableComponent attachable)
     {
-        burgerIngredients.Add(attachable.GetIngredient());
+        BurgerIngredient ingredient = attachable.GetIngredient();
+        burgerIngredients.Add(ingredient);
 
         GameObject graphics = Instantiate(attachable.GraphicsPrefab, transform);
-        graphics.transform.position = attachmentTrigger.position;
+        graphics.transform.position = attachmentTrigger.transform.position;
 
-        attachmentTrigger.localPosition = attachmentTrigger.localPosition + Vector3.up * attachable.IngredientHeight;
+        attachmentTrigger.transform.localPosition = attachmentTrigger.transform.localPosition + Vector3.up * attachable.IngredientHeight;
+
+        if (ingredient.IngredientType == BurgerIngredientType.BUN_TOP)
+        {
+            attachmentTrigger.enabled = false;
+        }
 
         Destroy(attachable.gameObject);
     }
