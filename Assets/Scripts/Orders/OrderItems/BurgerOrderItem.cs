@@ -6,9 +6,9 @@ public class BurgerOrderItem : OrderItem
 {
     public override OrderItemType ItemType { get => OrderItemType.BURGER; }
 
-    public BurgerContents BurgerContents { get; protected set; }
+    public List<BurgerIngredient> BurgerContents { get; protected set; }
 
-    public BurgerOrderItem(BurgerContents burgerContents)
+    public BurgerOrderItem(List<BurgerIngredient> burgerContents)
     {
         this.BurgerContents = burgerContents;
     }

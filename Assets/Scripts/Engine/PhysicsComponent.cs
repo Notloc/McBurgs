@@ -27,4 +27,14 @@ public class PhysicsComponent : MonoBehaviour
     {
         IsConnectedToJoint = isConnectedToJoint;
     }
+
+    public void Lock()
+    {
+        RigidbodyOverrides.IsKinematic.Set(true);
+    }
+
+    public void Unlock()
+    {
+        RigidbodyOverrides.IsKinematic.Clear();
+    }
 }
