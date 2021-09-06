@@ -58,6 +58,7 @@ public class OrderTraySystem : MonoBehaviour
         joint.connectedBody = objectWithPhysics.Rigidbody;
 
         objectWithPhysics.RigidbodyOverrides.Interpolation.Set(RigidbodyInterpolation.Interpolate);
+        objectWithPhysics.SetConnectedToJoint(true);
     }
 
     
